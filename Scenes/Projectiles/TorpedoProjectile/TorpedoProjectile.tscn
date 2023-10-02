@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtacj3hyfthow"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/TorpedoProjectile/TorpedoProjectile.cs" id="1_0vqsb"]
+[ext_resource type="Texture2D" uid="uid://b4fws7dwkl005" path="res://Assets/TorpedoShip/Kla'ed - Torpedo.png" id="2_21rwi"]
+[ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_tbxvh"]
+[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="4_shi0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlqpo"]
+size = Vector2(6, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec5qd"]
+atlas = ExtResource("2_21rwi")
+region = Rect2(0, 0, 11, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj61q"]
+atlas = ExtResource("2_21rwi")
+region = Rect2(11, 0, 11, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbkv5"]
+atlas = ExtResource("2_21rwi")
+region = Rect2(22, 0, 11, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_anmra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ec5qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cj61q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbkv5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chrs3"]
+size = Vector2(6, 16)
+
+[node name="TorpedoProjectile" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0vqsb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_nlqpo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_anmra")
+autoplay = "default"
+frame_progress = 0.715276
+offset = Vector2(0, 7)
+
+[node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_tbxvh")]
+lifetimeSeconds = 5.0
+nodeToDelete = NodePath("..")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_shi0t")]
+visible = false
+collision_layer = 8
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_chrs3")
