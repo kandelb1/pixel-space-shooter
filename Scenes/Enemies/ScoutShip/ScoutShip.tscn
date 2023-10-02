@@ -260,7 +260,6 @@ show_behind_parent = true
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_nc134")
 autoplay = "default"
-frame_progress = 0.634664
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("7_tn665")]
 visible = false

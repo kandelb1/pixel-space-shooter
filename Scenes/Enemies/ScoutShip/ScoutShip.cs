@@ -8,6 +8,7 @@ public partial class ScoutShip : RigidBody2D
     private AnimatedSprite2D engine;
 
     private Vector2 firePoint;
+    private bool dead;
 
     private HealthComponent healthComponent;
 
@@ -39,14 +40,6 @@ public partial class ScoutShip : RigidBody2D
         sightRadiusComponent.ExitedSightRadius += HandleEnemyExitedRange;
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        // if (@event.IsActionPressed("fire"))
-        // {
-        //     ship.Play("shoot");
-        // }
-    }
-    
     // TODO: duplicate code from player's Ship class
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
     {
@@ -74,6 +67,7 @@ public partial class ScoutShip : RigidBody2D
 
     public async void Destroy()
     {
+        dead = true;
         engine.Hide();
         uiNode.Hide();
         ship.Play("explode");
@@ -94,11 +88,13 @@ public partial class ScoutShip : RigidBody2D
 
     private void HandleEnemyInRange(Node2D body)
     {
+        if (dead) return;
         ship.Play("shoot");
     }
 
     private void HandleEnemyExitedRange(Node2D body)
     {
+        if (dead) return;
         ship.Play("default"); // default animation
     }
 }
