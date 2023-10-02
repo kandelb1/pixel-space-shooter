@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv12hew8xt488"]
+
+[ext_resource type="Script" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.cs" id="1_p04uo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ucoxf"]
+resource_local_to_scene = true
+
+[node name="SightRadiusComponent" type="Area2D"]
+script = ExtResource("1_p04uo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ucoxf")
+debug_color = Color(0.952941, 0.192157, 0.266667, 0.419608)

@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://elaosbwkplr8"]
+
+[ext_resource type="Texture2D" uid="uid://bpbpodp3rkf5o" path="res://Assets/Scout/Kla'ed - Bullet.png" id="1_0885n"]
+[ext_resource type="Script" path="res://Scenes/Projectiles/BasicBullet/BasicBullet.cs" id="1_m7n7l"]
+[ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_veynt"]
+[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="4_luop8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wmhl"]
+size = Vector2(4, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mljwi"]
+atlas = ExtResource("1_0885n")
+region = Rect2(0, 0, 4, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq1jp"]
+atlas = ExtResource("1_0885n")
+region = Rect2(4, 0, 4, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnf3"]
+atlas = ExtResource("1_0885n")
+region = Rect2(8, 0, 4, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wru58"]
+atlas = ExtResource("1_0885n")
+region = Rect2(12, 0, 4, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u244x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mljwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq1jp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wnf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wru58")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g5er"]
+size = Vector2(2, 10)
+
+[node name="BasicBullet" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+center_of_mass_mode = 1
+script = ExtResource("1_m7n7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_0wmhl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u244x")
+autoplay = "default"
+frame_progress = 0.766388
+
+[node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_veynt")]
+lifetimeSeconds = 3.0
+nodeToDelete = NodePath("..")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_luop8")]
+visible = false
+collision_layer = 8
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_4g5er")

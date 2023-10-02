@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://hqqlksqhi03j"]
+
+[ext_resource type="Script" path="res://Scenes/Ship/Ship.cs" id="2_lmpg3"]
+[ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_x7te5"]
+[ext_resource type="Texture2D" uid="uid://cw8c5dl4q50xa" path="res://Assets/Player/Main Ship - Base - Full health.png" id="3_tjkyu"]
+[ext_resource type="PackedScene" uid="uid://cn0s4yv4osibw" path="res://Scenes/Weapons/RocketWeapon/RocketWeapon.tscn" id="4_852pw"]
+[ext_resource type="PackedScene" uid="uid://chbw4gqgh52cm" path="res://Scenes/Weapons/AutoCannonWeapon/AutoCannonWeapon.tscn" id="5_hwrgi"]
+[ext_resource type="Texture2D" uid="uid://bakirdcpr77pm" path="res://Assets/Player/Main Ship - Engines - Base Engine.png" id="6_r6rkh"]
+[ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="7_12o86"]
+[ext_resource type="Texture2D" uid="uid://ci331cjf7h8oh" path="res://Assets/Player/Main Ship - Engines - Base Engine - Spritesheet.png" id="7_apa0s"]
+[ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="8_v583v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0crt"]
+radius = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gc4u"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5tkq"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16ap5"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ush0w"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0kkc"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s8pn"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttsad"]
+atlas = ExtResource("7_apa0s")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpgw8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gc4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5tkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16ap5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ush0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0kkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s8pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttsad")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4iwxo"]
+radius = 17.0
+
+[node name="Ship" type="RigidBody2D" groups=["player"]]
+collision_mask = 4
+center_of_mass_mode = 1
+can_sleep = false
+linear_damp = 1.0
+script = ExtResource("2_lmpg3")
+rocketProjectile = ExtResource("2_x7te5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_n0crt")
+
+[node name="FirePoint" type="Node2D" parent="."]
+position = Vector2(0, -35)
+
+[node name="BaseShip" type="Sprite2D" parent="."]
+z_as_relative = false
+texture = ExtResource("3_tjkyu")
+
+[node name="Weapons" type="Node2D" parent="BaseShip"]
+show_behind_parent = true
+
+[node name="RocketsWeapon" parent="BaseShip/Weapons" node_paths=PackedStringArray("ship") instance=ExtResource("4_852pw")]
+visible = false
+ship = NodePath("../../..")
+
+[node name="AutoCannonWeapon" parent="BaseShip/Weapons" node_paths=PackedStringArray("ship") instance=ExtResource("5_hwrgi")]
+visible = false
+ship = NodePath("../../..")
+
+[node name="Engine" type="Sprite2D" parent="BaseShip"]
+show_behind_parent = true
+z_as_relative = false
+texture = ExtResource("6_r6rkh")
+
+[node name="EngineEffects" type="AnimatedSprite2D" parent="BaseShip/Engine"]
+show_behind_parent = true
+sprite_frames = SubResource("SpriteFrames_dpgw8")
+animation = &"idle"
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("7_12o86")]
+visible = false
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_4iwxo")
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_v583v")]

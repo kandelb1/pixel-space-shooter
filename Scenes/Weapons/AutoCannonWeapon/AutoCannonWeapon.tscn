@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://chbw4gqgh52cm"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/AutoCannonWeapon/AutoCannonWeapon.cs" id="1_g2c3w"]
+[ext_resource type="Texture2D" uid="uid://bnlcwmkjc4u43" path="res://Assets/Player/Main Ship - Weapons - Auto Cannon.png" id="2_1fckc"]
+[ext_resource type="PackedScene" uid="uid://duo44g5se5g60" path="res://Scenes/Projectiles/AutoCannonProjectile/AutoCannonProjectile.tscn" id="2_eft66"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfvc4"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5ldq"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_855yw"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xvt7"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl2il"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfpxi"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am3sy"]
+atlas = ExtResource("2_1fckc")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0kjad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfvc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5ldq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_855yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xvt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bl2il")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfpxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am3sy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="AutoCannonWeapon" type="Node2D"]
+script = ExtResource("1_g2c3w")
+autoCannonProjectile = ExtResource("2_eft66")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0kjad")
+autoplay = "default"
+
+[node name="FirePointLeft" type="Node2D" parent="."]
+position = Vector2(-9, -18)
+
+[node name="FirePointRight" type="Node2D" parent="."]
+position = Vector2(9, -18)

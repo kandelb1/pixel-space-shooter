@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://vd7ao2do38rq"]
+
+[ext_resource type="Texture2D" uid="uid://caqruy56x2xxx" path="res://Assets/UI/All.png" id="1_lii1f"]
+[ext_resource type="Script" path="res://Scenes/UI/TargetLock/TargetLock.cs" id="2_v0she"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckwqg"]
+atlas = ExtResource("1_lii1f")
+region = Rect2(1168, 208, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1y7q"]
+atlas = ExtResource("1_lii1f")
+region = Rect2(1200, 208, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd6e3"]
+atlas = ExtResource("1_lii1f")
+region = Rect2(1232, 208, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61c7i"]
+atlas = ExtResource("1_lii1f")
+region = Rect2(1264, 208, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibsvp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckwqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1y7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd6e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61c7i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_dyv5h"]
+resource_name = "default"
+length = 0.75
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahh0h"]
+_data = {
+"default": SubResource("Animation_dyv5h")
+}
+
+[node name="TargetLock" type="AnimatedSprite2D"]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_ibsvp")
+frame_progress = 0.707954
+script = ExtResource("2_v0she")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_ahh0h")
+}

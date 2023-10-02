@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck0l5aykc4jh0"]
+
+[ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
+[ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
+[ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
+[ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
+
+[node name="Main" type="Node"]
+
+[node name="Ship" parent="." instance=ExtResource("1_01vvk")]
+
+[node name="ScoutShip" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(-262, 143)
+
+[node name="ScoutShip2" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(-245, -123)
+
+[node name="ScoutShip3" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(-6, -123)
+
+[node name="ScoutShip4" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(79, -129)
+
+[node name="ScoutShip5" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(112, -69)
+
+[node name="ScoutShip6" parent="." instance=ExtResource("2_hcjv6")]
+position = Vector2(111, 68)
+
+[node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
+playerShip = NodePath("../Ship")
+
+[node name="ScreenUI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("3_7bthx")]
+playerShip = NodePath("../../Ship")

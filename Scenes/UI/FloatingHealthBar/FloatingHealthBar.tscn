@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bca3bh0ow107t"]
+
+[ext_resource type="Script" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.cs" id="1_pdkjr"]
+[ext_resource type="Texture2D" uid="uid://bm076dchn7new" path="res://Assets/UI/All.png" id="1_x0s33"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijno0"]
+atlas = ExtResource("1_x0s33")
+region = Rect2(576, 240, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yabxe"]
+atlas = ExtResource("1_x0s33")
+region = Rect2(624, 0, 48, 16)
+
+[node name="FloatingHealthBar" type="HBoxContainer"]
+offset_right = 57.0
+offset_bottom = 16.0
+alignment = 1
+script = ExtResource("1_pdkjr")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.2
+texture_under = SubResource("AtlasTexture_ijno0")
+texture_progress = SubResource("AtlasTexture_yabxe")

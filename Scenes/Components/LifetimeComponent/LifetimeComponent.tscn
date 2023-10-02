@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmge47jt5jid7"]
+
+[ext_resource type="Script" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.cs" id="1_gw8n3"]
+
+[node name="LifetimeComponent" type="Node"]
+script = ExtResource("1_gw8n3")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

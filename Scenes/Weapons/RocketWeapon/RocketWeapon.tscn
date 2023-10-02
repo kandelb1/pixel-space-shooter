@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://cn0s4yv4osibw"]
+
+[ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_lcv1h"]
+[ext_resource type="Script" path="res://Scenes/Weapons/RocketWeapon/RocketWeapon.cs" id="2_u2nx2"]
+[ext_resource type="Texture2D" uid="uid://dpb7a0cu8ynvd" path="res://Assets/Player/rocket firing.png" id="3_6oo4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37ld7"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2t0a"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qoht"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xi3m"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_825kf"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxos4"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(80, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixy3v"]
+atlas = ExtResource("3_6oo4n")
+region = Rect2(96, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_piods"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37ld7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2t0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qoht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xi3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_825kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxos4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixy3v")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="RocketsWeapon" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("2_u2nx2")
+rocketProjectileScene = ExtResource("2_lcv1h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Rockets" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="1" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(-7, -6)
+sprite_frames = SubResource("SpriteFrames_piods")
+
+[node name="2" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(6, -6)
+sprite_frames = SubResource("SpriteFrames_piods")
+frame_progress = 0.147272
+
+[node name="3" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(-11, -2)
+sprite_frames = SubResource("SpriteFrames_piods")
+
+[node name="4" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(10, -2)
+sprite_frames = SubResource("SpriteFrames_piods")
+
+[node name="5" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(-15, 2)
+sprite_frames = SubResource("SpriteFrames_piods")
+
+[node name="6" type="AnimatedSprite2D" parent="Rockets"]
+position = Vector2(14, 2)
+sprite_frames = SubResource("SpriteFrames_piods")
+frame_progress = 0.280543
