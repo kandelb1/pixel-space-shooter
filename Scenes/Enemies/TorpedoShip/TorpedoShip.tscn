@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bdwjvdc6xcnh0"]
+[gd_scene load_steps=69 format=3 uid="uid://bdwjvdc6xcnh0"]
 
 [ext_resource type="Texture2D" uid="uid://cjjxgmdwauvya" path="res://Assets/TorpedoShip/Kla'ed - Torpedo Ship - Destruction.png" id="1_4x8sy"]
 [ext_resource type="Script" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.cs" id="1_u5srn"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="5_dg0dx"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="6_vkne8"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="7_hjq0r"]
+[ext_resource type="Texture2D" uid="uid://spanqdnhiv3m" path="res://Assets/TorpedoShip/Kla'ed - Torpedo Ship - Shield.png" id="8_lasxd"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="8_rlk65"]
+[ext_resource type="PackedScene" uid="uid://cr48uy7s0vfdc" path="res://Scenes/Components/ShieldComponent/ShieldComponent.tscn" id="9_3faw3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx2fg"]
 size = Vector2(60, 24)
@@ -231,7 +233,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 8.0
+"speed": 6.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_823s4"]
@@ -312,12 +314,93 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7blt"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo7ah"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7q7h"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np2qv"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuioc"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8davq"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8akp"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ma16"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fw12"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ax37"]
+atlas = ExtResource("8_lasxd")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i6b70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7blt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo7ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7q7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np2qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuioc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8davq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8akp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ma16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fw12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ax37")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi38d"]
+size = Vector2(60, 5)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_h371h"]
 resource_local_to_scene = true
 radius = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3ptb"]
-size = Vector2(63, 27)
+size = Vector2(63, 24)
 
 [node name="TorpedoShip" type="RigidBody2D"]
 collision_layer = 4
@@ -332,13 +415,24 @@ shape = SubResource("RectangleShape2D_bx2fg")
 
 [node name="BaseShip" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rltec")
-animation = &"idle_loaded"
+animation = &"shoot"
 autoplay = "idle_loaded"
 
 [node name="Engine" type="AnimatedSprite2D" parent="BaseShip"]
 show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_notv6")
 autoplay = "default"
+
+[node name="Shield" type="AnimatedSprite2D" parent="BaseShip"]
+sprite_frames = SubResource("SpriteFrames_i6b70")
+
+[node name="ShieldComponent" parent="BaseShip/Shield" instance=ExtResource("9_3faw3")]
+position = Vector2(0, -16)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseShip/Shield/ShieldComponent"]
+shape = SubResource("RectangleShape2D_xi38d")
 
 [node name="TorpedoFirePoints" type="Node2D" parent="."]
 
@@ -370,12 +464,12 @@ visible = false
 shape = SubResource("CircleShape2D_h371h")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("7_hjq0r")]
-visible = false
+position = Vector2(0, 1)
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0.5, 0.5)
+position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_d3ptb")
 
 [node name="UI" type="Node2D" parent="."]
@@ -383,9 +477,9 @@ top_level = true
 
 [node name="FloatingHealthBar" parent="UI" instance=ExtResource("8_rlk65")]
 offset_left = -28.0
-offset_top = -26.0
+offset_top = -29.0
 offset_right = 29.0
-offset_bottom = -10.0
+offset_bottom = -13.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../UI")
