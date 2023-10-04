@@ -5,6 +5,7 @@ public partial class DreadnoughtShip : RigidBody2D
 {
 
     private const float ROTATION_SPEED = 0.13f;
+    private const int MAX_DEATHRAY_DISTANCE = 370;
     
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -72,6 +73,20 @@ public partial class DreadnoughtShip : RigidBody2D
         LookFollow(state, targetPos);
     }
 
+    public override void _Process(double delta)
+    {
+        if (!deathRayFiring) return;
+        // update death ray length
+        UpdateDeathRay();
+    }
+
+    private void UpdateDeathRay()
+    {
+        int distanceToPlayer = (int) Position.DistanceTo(player.Position);
+        int deathRayDistance = Mathf.Min(distanceToPlayer, MAX_DEATHRAY_DISTANCE);
+        deathRay.SetPointPosition(1, new Vector2(0, -deathRayDistance));
+    }
+
     private void ToggleDeathRay(bool active)
     {
         deathRay.Visible = active;
@@ -82,7 +97,7 @@ public partial class DreadnoughtShip : RigidBody2D
     {
         if (dead) return;
         dead = true;
-        ship.Play("idle"); // in case we're in the middle of firing
+        ship.Play("idle"); // in case we're in the middle of firing the death ray
         ToggleDeathRay(false);
         engine.Hide();
         shield.Hide();

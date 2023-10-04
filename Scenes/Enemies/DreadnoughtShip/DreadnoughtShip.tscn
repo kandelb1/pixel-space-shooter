@@ -19,12 +19,12 @@
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_c5gru"]
 frames = 4
 speed_scale = 12.0
-frame_0/texture = ExtResource("6_4642q")
-frame_1/texture = ExtResource("5_x4kch")
+frame_0/texture = ExtResource("3_wb5l5")
+frame_1/texture = ExtResource("4_ugexu")
 frame_1/duration = 1.0
-frame_2/texture = ExtResource("4_ugexu")
+frame_2/texture = ExtResource("5_x4kch")
 frame_2/duration = 1.0
-frame_3/texture = ExtResource("3_wb5l5")
+frame_3/texture = ExtResource("6_4642q")
 frame_3/duration = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rw4o"]
@@ -750,7 +750,7 @@ script = ExtResource("1_g0rjm")
 [node name="DeathRay" type="Line2D" parent="."]
 texture_repeat = 2
 position = Vector2(0, -49)
-points = PackedVector2Array(0, -371, 0, 0)
+points = PackedVector2Array(0, 0, 0, -370)
 width = 18.0
 texture = SubResource("AnimatedTexture_c5gru")
 texture_mode = 1
