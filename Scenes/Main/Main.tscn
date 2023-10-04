@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=7 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="5_p8a5o"]
+[ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_t5p5p"]
 
 [node name="Main" type="Node"]
 
@@ -38,3 +39,6 @@ playerShip = NodePath("../../Ship")
 
 [node name="TorpedoShip" parent="." instance=ExtResource("5_p8a5o")]
 position = Vector2(-194, 31)
+
+[node name="DreadnoughtShip" parent="." instance=ExtResource("6_t5p5p")]
+position = Vector2(-115, -83)

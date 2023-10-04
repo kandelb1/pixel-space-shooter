@@ -67,6 +67,7 @@ public partial class ScoutShip : RigidBody2D
 
     public async void Destroy()
     {
+        if (dead) return;
         dead = true;
         engine.Hide();
         uiNode.Hide();

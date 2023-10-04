@@ -1,32 +1,30 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-public partial class TorpedoShip : RigidBody2D
+public partial class DreadnoughtShip : RigidBody2D
 {
-    private const float ROTATION_SPEED = 0.01f;
-    
-    [Export] private PackedScene torpedoScene;
 
+    private const float ROTATION_SPEED = 0.13f;
+    
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
     private AnimatedSprite2D shield;
-
-    private bool dead;
-
-    private List<Vector2> firePoints;
-    private int firePointIndex;
-    private bool firedAllTorpedoes;
     
     private Node2D uiNode;
     
     private HealthComponent healthComponent;
-    private HurtboxComponent hurtboxComponent;
+    // private HurtboxComponent hurtboxComponent;
     private SightRadiusComponent sightRadiusComponent;
-    private ShieldComponent shieldComponent;
+    // private ShieldComponent shieldComponent;
 
     private Node2D player;
+
+    private Line2D deathRay;
+    private Area2D deathRayHitbox;
+    private bool deathRayFiring;
+    private Timer deathRayCooldownTimer;
+
+    private bool dead;
 
     public override void _Ready()
     {
@@ -34,22 +32,20 @@ public partial class TorpedoShip : RigidBody2D
         ship.FrameChanged += HandleFrameChanged;
         engine = GetNode<AnimatedSprite2D>("BaseShip/Engine");
         shield = GetNode<AnimatedSprite2D>("BaseShip/Shield");
-        shield.Hide();
-
-        firePoints = GetNode("TorpedoFirePoints").GetChildren().Cast<Node2D>().Select(x => x.Position).ToList();
-
-        uiNode = GetNode<Node2D>("UI");
         
+        uiNode = GetNode<Node2D>("UI");
+
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         healthComponent.HealthZero += Destroy;
-        hurtboxComponent = GetNode<HurtboxComponent>("HurtboxComponent");
         sightRadiusComponent = GetNode<SightRadiusComponent>("SightRadiusComponent");
         sightRadiusComponent.EnteredSightRadius += HandleEnemyInRange;
-        // sightRadiusComponent.ExitedSightRadius += HandleEnemyExitedRange;
-        shieldComponent = GetNode<ShieldComponent>("BaseShip/Shield/ShieldComponent");
-        shieldComponent.Monitoring = false;
 
         player = (Node2D) GetTree().GetFirstNodeInGroup("player");
+        
+        deathRay = GetNode<Line2D>("DeathRay");
+        deathRayHitbox = GetNode<Area2D>("DeathRay/HitboxComponent");
+        ToggleDeathRay(false);
+        deathRayCooldownTimer = GetNode<Timer>("DeathRay/CooldownTimer");
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -66,8 +62,8 @@ public partial class TorpedoShip : RigidBody2D
         {
             rotationAngle += Mathf.Pi * 2;
         }
-        
-        state.AngularVelocity = (rotationAngle / state.Step) * ROTATION_SPEED;
+
+        state.AngularVelocity = rotationAngle / state.Step * ROTATION_SPEED;
     }
     
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -76,10 +72,18 @@ public partial class TorpedoShip : RigidBody2D
         LookFollow(state, targetPos);
     }
 
+    private void ToggleDeathRay(bool active)
+    {
+        deathRay.Visible = active;
+        deathRayHitbox.Monitoring = active;
+    }
+
     private async void Destroy()
     {
         if (dead) return;
         dead = true;
+        ship.Play("idle"); // in case we're in the middle of firing
+        ToggleDeathRay(false);
         engine.Hide();
         shield.Hide();
         uiNode.Hide();
@@ -90,35 +94,26 @@ public partial class TorpedoShip : RigidBody2D
 
     private void HandleFrameChanged()
     {
-        if (ship.Animation != "shoot") return;
-        if (ship.Frame < 4) return;
-        if (ship.Frame % 2 == 0)
+        if (ship.Animation == "shoot" && ship.Frame == 12)
         {
-            TorpedoProjectile torpedo = torpedoScene.Instantiate<TorpedoProjectile>();
-            torpedo.SetPosition(ToGlobal(firePoints[firePointIndex]));
-            torpedo.SetRotation(Rotation);
-            GetNode("/root").AddChild(torpedo);
-            firePointIndex++;
+            ToggleDeathRay(true);
+        }
+
+        if (ship.Animation == "shoot" && ship.Frame == 56)
+        {
+            ToggleDeathRay(false);
         }
     }
 
     private async void HandleEnemyInRange(Node2D body)
     {
-        if (firedAllTorpedoes) return;
-        // fire all the torpedoes!!
+        if (dead) return;
+        if (deathRayFiring || deathRayCooldownTimer.TimeLeft > 0) return;
         ship.Play("shoot");
+        deathRayFiring = true;
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
-        firedAllTorpedoes = true;
-        ship.Play("idle_unloaded");
-        shield.Show();
-        shield.Play();
-        await ToSignal(shield, AnimatedSprite2D.SignalName.AnimationFinished);
-        shieldComponent.Monitoring = true;
+        ship.Play("idle");
+        deathRayFiring = false;
+        deathRayCooldownTimer.Start();
     }
-
-    // private void ActivateShield()
-    // {
-    //     shield.Show();
-    //     shield.Play();
-    // }
 }
