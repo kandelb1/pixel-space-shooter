@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=30 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
@@ -6,6 +6,151 @@
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="5_p8a5o"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_t5p5p"]
+[ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
+[ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
+[ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh3nr"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwxyt"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7l70"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs6ph"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mox57"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(3200, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs5cq"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(3840, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrpxr"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(4480, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5gif"]
+atlas = ExtResource("8_qkr82")
+region = Rect2(5120, 0, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o45vb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfgxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh3nr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwxyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7l70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs6ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mox57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs5cq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrpxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5gif")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q3yj"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p582i"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(640, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4h3c"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(1280, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf228"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(1920, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4tdr"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(2560, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8l5"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(3200, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woxia"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(3840, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_278nu"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(4480, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ikh"]
+atlas = ExtResource("9_paqhv")
+region = Rect2(5120, 0, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1ctn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q3yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p582i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4h3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf228")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4tdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y8l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woxia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_278nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ikh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [node name="Main" type="Node"]
 
@@ -42,3 +187,33 @@ position = Vector2(-194, 31)
 
 [node name="DreadnoughtShip" parent="." instance=ExtResource("6_t5p5p")]
 position = Vector2(-115, -83)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Void" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(5760, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Void"]
+texture = ExtResource("7_rxews")
+centered = false
+
+[node name="TinyStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.45, 0.45)
+motion_mirroring = Vector2(640, 360)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/TinyStars"]
+sprite_frames = SubResource("SpriteFrames_o45vb")
+autoplay = "default"
+frame_progress = 0.930016
+centered = false
+
+[node name="BigStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.65, 0.65)
+motion_mirroring = Vector2(640, 360)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/BigStars"]
+sprite_frames = SubResource("SpriteFrames_t1ctn")
+autoplay = "default"
+frame_progress = 0.235735
+centered = false

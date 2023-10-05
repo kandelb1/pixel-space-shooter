@@ -119,9 +119,9 @@ public partial class Ship : RigidBody2D
 
     private async void HandleHealthChanged(int newHealth)
     {
-        // healthComponent.SetInvulnerable(true);
-        // animPlayer.Play("damage_flash");
-        // await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
-        // healthComponent.SetInvulnerable(false);
+        healthComponent.SetInvulnerable(true);
+        animPlayer.Play("damage_flash");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        healthComponent.SetInvulnerable(false);
     }
 }
