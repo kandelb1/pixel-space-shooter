@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dl1no7b4vhtin" path="res://Assets/Player/Main ship weapon - Projectile - Rocket.png" id="1_j8b1w"]
 [ext_resource type="Script" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.cs" id="1_lh3ly"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_on6sp"]
-[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="4_6nrg3"]
+[ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="4_o8pon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbpg6"]
 size = Vector2(5, 17)
@@ -61,12 +61,11 @@ frame_progress = 0.495374
 lifetimeSeconds = 3.0
 nodeToDelete = NodePath("..")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("4_6nrg3")]
-visible = false
+[node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_o8pon")]
 collision_layer = 2
 collision_mask = 4
 damage = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
 position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_hjpgl")

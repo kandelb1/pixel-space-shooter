@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dnoq3l6mvwa5" path="res://Assets/Dreadnought/dreadnought-ray-2.png" id="4_ugexu"]
 [ext_resource type="Texture2D" uid="uid://fmwhv1g2efea" path="res://Assets/Dreadnought/dreadnought-ray-3.png" id="5_x4kch"]
 [ext_resource type="Texture2D" uid="uid://b6dihpfuebe0x" path="res://Assets/Dreadnought/dreadnought-ray-4.png" id="6_4642q"]
+[ext_resource type="PackedScene" uid="uid://0wa6k0q6p2g1" path="res://Scenes/Components/PersistentHitboxComponent/PersistentHitboxComponent.tscn" id="6_f8ly6"]
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="7_jrmsl"]
-[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="7_t05oq"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="8_yhked"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="9_av8va"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="15_iqa2v"]
@@ -27,8 +27,8 @@ frame_2/duration = 1.0
 frame_3/texture = ExtResource("6_4642q")
 frame_3/duration = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rw4o"]
-size = Vector2(5.99998, 371)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o76dw"]
+size = Vector2(6, 370)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvt1n"]
 radius = 40.0
@@ -759,14 +759,13 @@ texture_mode = 1
 wait_time = 5.0
 one_shot = true
 
-[node name="HitboxComponent" parent="DeathRay" instance=ExtResource("7_t05oq")]
+[node name="PersistentHitboxComponent" parent="DeathRay" instance=ExtResource("6_f8ly6")]
 collision_layer = 8
 damage = 1
-lasting = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathRay/HitboxComponent"]
-position = Vector2(-9.83467e-07, -184.5)
-shape = SubResource("RectangleShape2D_4rw4o")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathRay/PersistentHitboxComponent"]
+position = Vector2(0, -184.5)
+shape = SubResource("RectangleShape2D_o76dw")
 
 [node name="FirePoint" type="Node2D" parent="."]
 position = Vector2(0, -50)

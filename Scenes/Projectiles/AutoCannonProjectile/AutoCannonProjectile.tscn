@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://7e85f0knpi3y" path="res://Assets/Player/Main ship weapon - Projectile - Auto cannon bullet.png" id="1_b620w"]
 [ext_resource type="Script" path="res://Scenes/Projectiles/AutoCannonProjectile/AutoCannonProjectile.cs" id="1_dh784"]
-[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="3_2a3vt"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_7mhi6"]
+[ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="3_8lso6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fenao"]
 size = Vector2(12, 18)
@@ -44,8 +44,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya3s4"]
-size = Vector2(12, 18)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k86l8"]
+size = Vector2(10, 16)
 
 [node name="AutoCannonProjectile" type="RigidBody2D"]
 collision_layer = 0
@@ -61,14 +61,13 @@ shape = SubResource("RectangleShape2D_fenao")
 sprite_frames = SubResource("SpriteFrames_mpkey")
 frame_progress = 0.652077
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_2a3vt")]
-visible = false
+[node name="ProjectileHitboxComponent" parent="." instance=ExtResource("3_8lso6")]
 collision_layer = 2
 collision_mask = 4
 damage = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("RectangleShape2D_ya3s4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
+shape = SubResource("RectangleShape2D_k86l8")
 
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_7mhi6")]
 lifetimeSeconds = 3.0

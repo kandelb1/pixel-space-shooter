@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0wa6k0q6p2g1"]
+
+[ext_resource type="Script" path="res://Scenes/Components/PersistentHitboxComponent/PersistentHitboxComponent.cs" id="1_7epti"]
+
+[node name="PersistentHitboxComponent" type="Area2D"]
+script = ExtResource("1_7epti")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

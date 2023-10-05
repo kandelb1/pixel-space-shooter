@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Projectiles/TorpedoProjectile/TorpedoProjectile.cs" id="1_0vqsb"]
 [ext_resource type="Texture2D" uid="uid://b4fws7dwkl005" path="res://Assets/TorpedoShip/Kla'ed - Torpedo.png" id="2_21rwi"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_tbxvh"]
-[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="4_shi0t"]
+[ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="4_hlxig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlqpo"]
 size = Vector2(6, 17)
@@ -60,11 +60,10 @@ offset = Vector2(0, 7)
 lifetimeSeconds = 5.0
 nodeToDelete = NodePath("..")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("4_shi0t")]
-visible = false
+[node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_hlxig")]
 collision_layer = 8
 damage = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_chrs3")

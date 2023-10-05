@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bpbpodp3rkf5o" path="res://Assets/Scout/Kla'ed - Bullet.png" id="1_0885n"]
 [ext_resource type="Script" path="res://Scenes/Projectiles/BasicBullet/BasicBullet.cs" id="1_m7n7l"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_veynt"]
-[ext_resource type="PackedScene" uid="uid://dge3qcr1gok4r" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="4_luop8"]
+[ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="4_3newp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wmhl"]
 size = Vector2(4, 11)
@@ -67,11 +67,10 @@ frame_progress = 0.766388
 lifetimeSeconds = 3.0
 nodeToDelete = NodePath("..")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("4_luop8")]
-visible = false
+[node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_3newp")]
 collision_layer = 8
 damage = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4g5er")

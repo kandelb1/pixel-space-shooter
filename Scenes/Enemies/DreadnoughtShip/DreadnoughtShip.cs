@@ -20,7 +20,7 @@ public partial class DreadnoughtShip : RigidBody2D
 
     // TODO: move the deathray to its own scene, so we only have to talk to 1 node instead of all of these
     private Line2D deathRay;
-    private HitboxComponent deathRayHitbox;
+    private PersistentHitboxComponent deathRayHitbox;
     private CollisionShape2D deathRayCollisionShape;
     private bool deathRayFiring;
     private Timer deathRayCooldownTimer;
@@ -44,8 +44,8 @@ public partial class DreadnoughtShip : RigidBody2D
         player = (Node2D) GetTree().GetFirstNodeInGroup("player");
         
         deathRay = GetNode<Line2D>("DeathRay");
-        deathRayHitbox = GetNode<HitboxComponent>("DeathRay/HitboxComponent");
-        deathRayCollisionShape = GetNode<CollisionShape2D>("DeathRay/HitboxComponent/CollisionShape2D");
+        deathRayHitbox = GetNode<PersistentHitboxComponent>("DeathRay/PersistentHitboxComponent");
+        deathRayCollisionShape = GetNode<CollisionShape2D>("DeathRay/PersistentHitboxComponent/CollisionShape2D");
         deathRayCooldownTimer = GetNode<Timer>("DeathRay/CooldownTimer");
         ToggleDeathRay(false);
     }
