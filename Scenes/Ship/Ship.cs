@@ -16,7 +16,10 @@ public partial class Ship : RigidBody2D
     private List<BaseWeapon> weapons;
     private BaseWeapon equippedWeapon;
     private int equippedIndex;
-    
+
+    private HealthComponent healthComponent;
+
+    private AnimationPlayer animPlayer;
 
     public override void _Ready()
     {
@@ -32,6 +35,11 @@ public partial class Ship : RigidBody2D
         equippedWeapon = weapons[0];
         equippedIndex = 0;
         equippedWeapon.SetEquipped(true);
+
+        healthComponent = GetNode<HealthComponent>("HealthComponent");
+        healthComponent.HealthChanged += HandleHealthChanged;
+
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -107,5 +115,13 @@ public partial class Ship : RigidBody2D
         //     rocket.SetInitialVelocity(LinearVelocity);
         //     GetNode("/root").AddChild(rocket);
         // }
+    }
+
+    private async void HandleHealthChanged(int newHealth)
+    {
+        healthComponent.SetInvulnerable(true);
+        animPlayer.Play("damage_flash");
+        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        healthComponent.SetInvulnerable(false);
     }
 }
