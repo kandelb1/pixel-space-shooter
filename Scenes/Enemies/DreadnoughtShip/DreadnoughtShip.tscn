@@ -28,7 +28,7 @@ frame_3/texture = ExtResource("6_4642q")
 frame_3/duration = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rw4o"]
-size = Vector2(6, 371)
+size = Vector2(5.99998, 371)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvt1n"]
 radius = 40.0
@@ -760,12 +760,12 @@ wait_time = 5.0
 one_shot = true
 
 [node name="HitboxComponent" parent="DeathRay" instance=ExtResource("7_t05oq")]
-visible = false
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+damage = 1
+lasting = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathRay/HitboxComponent"]
-position = Vector2(0, -185.5)
+position = Vector2(-9.83467e-07, -184.5)
 shape = SubResource("RectangleShape2D_4rw4o")
 
 [node name="FirePoint" type="Node2D" parent="."]

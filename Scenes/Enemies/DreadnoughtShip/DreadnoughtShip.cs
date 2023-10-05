@@ -14,14 +14,14 @@ public partial class DreadnoughtShip : RigidBody2D
     private Node2D uiNode;
     
     private HealthComponent healthComponent;
-    // private HurtboxComponent hurtboxComponent;
     private SightRadiusComponent sightRadiusComponent;
-    // private ShieldComponent shieldComponent;
 
     private Node2D player;
 
+    // TODO: move the deathray to its own scene, so we only have to talk to 1 node instead of all of these
     private Line2D deathRay;
-    private Area2D deathRayHitbox;
+    private HitboxComponent deathRayHitbox;
+    private CollisionShape2D deathRayCollisionShape;
     private bool deathRayFiring;
     private Timer deathRayCooldownTimer;
 
@@ -44,9 +44,10 @@ public partial class DreadnoughtShip : RigidBody2D
         player = (Node2D) GetTree().GetFirstNodeInGroup("player");
         
         deathRay = GetNode<Line2D>("DeathRay");
-        deathRayHitbox = GetNode<Area2D>("DeathRay/HitboxComponent");
-        ToggleDeathRay(false);
+        deathRayHitbox = GetNode<HitboxComponent>("DeathRay/HitboxComponent");
+        deathRayCollisionShape = GetNode<CollisionShape2D>("DeathRay/HitboxComponent/CollisionShape2D");
         deathRayCooldownTimer = GetNode<Timer>("DeathRay/CooldownTimer");
+        ToggleDeathRay(false);
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -85,12 +86,16 @@ public partial class DreadnoughtShip : RigidBody2D
         int distanceToPlayer = (int) Position.DistanceTo(player.Position);
         int deathRayDistance = Mathf.Min(distanceToPlayer, MAX_DEATHRAY_DISTANCE);
         deathRay.SetPointPosition(1, new Vector2(0, -deathRayDistance));
+        RectangleShape2D rect = (RectangleShape2D) deathRayCollisionShape.Shape;
+        rect.Size = new Vector2(6, deathRayDistance);
+        deathRayCollisionShape.Position = new Vector2(0, -deathRayDistance / 2);
     }
 
     private void ToggleDeathRay(bool active)
     {
         deathRay.Visible = active;
         deathRayHitbox.Monitoring = active;
+        deathRayHitbox.Monitorable = active;
     }
 
     private async void Destroy()
