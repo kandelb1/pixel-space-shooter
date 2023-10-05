@@ -15,6 +15,8 @@ public partial class RocketWeapon : BaseWeapon
     private List<AnimatedSprite2D> rockets;
     private int fireIndex = 0;
 
+    private AtlasTexture weaponImage;
+
     public override void _Ready()
     {
         timer = GetNode<Timer>("Timer");
@@ -22,6 +24,10 @@ public partial class RocketWeapon : BaseWeapon
         timer.Start();
         rockets = GetNode("Rockets").GetChildren().Cast<AnimatedSprite2D>().ToList();
         // targets = new List<Node2D>();
+        
+        weaponImage = new AtlasTexture();
+        weaponImage.Atlas = GD.Load<Texture2D>("res://Assets/Player/Main Ship - Weapons - Rockets.png");
+        weaponImage.Region = new Rect2(0, 0, 48, 48);
     }
 
     public override void _Input(InputEvent @event)
@@ -58,22 +64,6 @@ public partial class RocketWeapon : BaseWeapon
             TargetingManager.Instance.SetTargeting(false);
             GD.Print("TARGETING ENDED");
         }
-        // if (!IsEquipped()) return;
-        // if (currentAmmo <= 0) return;
-        // if (fireIndex >= rockets.Count) return;
-        // if (@event.IsActionPressed("fire"))
-        // {
-        //     rockets[fireIndex].Play();
-        //     RocketProjectile rocket = rocketProjectile.Instantiate<RocketProjectile>();
-        //     Vector2 position = rockets[fireIndex].Position + new Vector2(0, -10);
-        //     rocket.SetPosition(ToGlobal(position));
-        //     rocket.SetRotation(ship.Rotation);
-        //     rocket.SetInitialVelocity(ship.LinearVelocity);
-        //     GetNode("/root").AddChild(rocket);
-        //     currentAmmo--;
-        //     fireIndex++;
-        //     timer.Start(); // restart the reload timer
-        // }
     }
     
     private void HandleTimeout()
@@ -88,6 +78,7 @@ public partial class RocketWeapon : BaseWeapon
         rockets[fireIndex].Stop();
         rockets[fireIndex].Frame = 0;
         currentAmmo++;
-        // TargetingManager.Instance.SetMaxTargets(currentAmmo);
     }
+
+    public override Texture2D GetWeaponImage() => weaponImage;
 }

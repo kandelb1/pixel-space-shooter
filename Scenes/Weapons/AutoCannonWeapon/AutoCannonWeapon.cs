@@ -29,4 +29,6 @@ public partial class AutoCannonWeapon : BaseWeapon
             GetNode("/root").AddChild(bullet);
         }
     }
+
+    public override Texture2D GetWeaponImage() => animSprite.SpriteFrames.GetFrameTexture("default", 0);
 }

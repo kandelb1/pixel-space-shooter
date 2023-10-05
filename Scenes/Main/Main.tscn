@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=31 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
+[ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="5_p8a5o"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_t5p5p"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
@@ -182,6 +183,9 @@ playerShip = NodePath("../Ship")
 [node name="PlayerHealthBar" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("3_7bthx")]
 playerShip = NodePath("../../Ship")
 
+[node name="WeaponSelectUI" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("5_nj484")]
+playerShip = NodePath("../../Ship")
+
 [node name="TorpedoShip" parent="." instance=ExtResource("5_p8a5o")]
 position = Vector2(-194, 31)
 
@@ -205,7 +209,6 @@ motion_mirroring = Vector2(640, 360)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/TinyStars"]
 sprite_frames = SubResource("SpriteFrames_o45vb")
 autoplay = "default"
-frame_progress = 0.930016
 centered = false
 
 [node name="BigStars" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -215,5 +218,4 @@ motion_mirroring = Vector2(640, 360)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/BigStars"]
 sprite_frames = SubResource("SpriteFrames_t1ctn")
 autoplay = "default"
-frame_progress = 0.235735
 centered = false

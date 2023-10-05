@@ -5,6 +5,8 @@ using System.Linq;
 
 public partial class Ship : RigidBody2D
 {
+    [Signal]
+    public delegate void WeaponEquippedEventHandler(BaseWeapon weapon);
 
     private const int MOVE_SPEED = 300;
 
@@ -84,14 +86,12 @@ public partial class Ship : RigidBody2D
         if (Input.IsActionPressed("move_left"))
         {
             state.ApplyForce(new Vector2(-MOVE_SPEED, 0).Rotated(Rotation));
-            // state.ApplyForce(new Vector2(-MOVE_SPEED, 0 ));
             moving = true;
         }
 
         if (Input.IsActionPressed("move_right"))
         {
             state.ApplyForce(new Vector2(MOVE_SPEED, 0).Rotated(Rotation));
-            // state.ApplyForce(new Vector2(MOVE_SPEED, 0 ));
             moving = true;
         }
         engineEffects.Play(moving ? "moving" : "idle");
@@ -101,20 +101,13 @@ public partial class Ship : RigidBody2D
     {
         if (@event.IsActionPressed("change_weapon"))
         {
-            equippedWeapon.SetEquipped(false); // unequip current weapon
+            equippedWeapon.SetEquipped(false);
             equippedIndex += 1;
             if (equippedIndex >= weapons.Count) equippedIndex = 0;
             equippedWeapon = weapons[equippedIndex];
             equippedWeapon.SetEquipped(true);
+            EmitSignal(SignalName.WeaponEquipped, equippedWeapon);
         }
-        // if (@event.IsActionPressed("fire"))
-        // {
-        //     RocketProjectile rocket = rocketProjectile.Instantiate<RocketProjectile>();
-        //     rocket.SetPosition(ToGlobal(firePoint));
-        //     rocket.SetRotation(Rotation);
-        //     rocket.SetInitialVelocity(LinearVelocity);
-        //     GetNode("/root").AddChild(rocket);
-        // }
     }
 
     private async void HandleHealthChanged(int newHealth)
@@ -124,4 +117,6 @@ public partial class Ship : RigidBody2D
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
         healthComponent.SetInvulnerable(false);
     }
+
+    public BaseWeapon GetEquippedWeapon() => equippedWeapon;
 }

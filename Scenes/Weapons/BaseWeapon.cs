@@ -13,4 +13,6 @@ public abstract partial class BaseWeapon : Node2D
         Visible = equipped;
         SetProcess(equipped);
     }
+
+    public abstract Texture2D GetWeaponImage();
 }
