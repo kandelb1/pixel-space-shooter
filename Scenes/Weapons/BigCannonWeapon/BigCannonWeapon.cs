@@ -35,7 +35,9 @@ public partial class BigCannonWeapon : BaseWeapon
             bullet.SetStartPosition(ToGlobal(firePoint));
             bullet.SetStartRotation(ship.Rotation);
             GetNode("/root").AddChild(bullet); // TODO: find a better way to add bullets to the scene tree
-            // TODO: add recoil force to the ship
+            
+            // add recoil
+            ship.ApplyImpulse(new Vector2(0, 1).Rotated(ship.Rotation) * 250f);
         }
     }
 
