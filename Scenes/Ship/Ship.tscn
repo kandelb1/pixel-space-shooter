@@ -1,11 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://hqqlksqhi03j"]
+[gd_scene load_steps=27 format=3 uid="uid://hqqlksqhi03j"]
 
 [ext_resource type="Script" path="res://Scenes/Ship/Ship.cs" id="2_lmpg3"]
 [ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_x7te5"]
 [ext_resource type="Texture2D" uid="uid://cw8c5dl4q50xa" path="res://Assets/Player/Main Ship - Base - Full health.png" id="3_tjkyu"]
+[ext_resource type="Texture2D" uid="uid://bvjj6eij6gmu5" path="res://Assets/Player/Main Ship - Base - Slight damage.png" id="4_6n0sq"]
 [ext_resource type="PackedScene" uid="uid://cn0s4yv4osibw" path="res://Scenes/Weapons/RocketWeapon/RocketWeapon.tscn" id="4_852pw"]
+[ext_resource type="Texture2D" uid="uid://dmxog0f10vuxy" path="res://Assets/Player/Main Ship - Base - Damaged.png" id="5_coupd"]
 [ext_resource type="PackedScene" uid="uid://chbw4gqgh52cm" path="res://Scenes/Weapons/AutoCannonWeapon/AutoCannonWeapon.tscn" id="5_hwrgi"]
 [ext_resource type="PackedScene" uid="uid://cdeqgtonx7o8q" path="res://Scenes/Weapons/BigCannonWeapon/BigCannonWeapon.tscn" id="6_5ibvh"]
+[ext_resource type="Texture2D" uid="uid://c1akus7sf27nw" path="res://Assets/Player/Main Ship - Base - Very damaged.png" id="6_6ypgs"]
 [ext_resource type="Texture2D" uid="uid://bakirdcpr77pm" path="res://Assets/Player/Main Ship - Engines - Base Engine.png" id="6_r6rkh"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="7_12o86"]
 [ext_resource type="Texture2D" uid="uid://ci331cjf7h8oh" path="res://Assets/Player/Main Ship - Engines - Base Engine - Spritesheet.png" id="7_apa0s"]
@@ -123,6 +126,10 @@ can_sleep = false
 linear_damp = 1.0
 script = ExtResource("2_lmpg3")
 rocketProjectile = ExtResource("2_x7te5")
+fullHealthImage = ExtResource("3_tjkyu")
+slightlyDamagedImage = ExtResource("4_6n0sq")
+moderatelyDamagedImage = ExtResource("5_coupd")
+severelyDamagedImage = ExtResource("6_6ypgs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

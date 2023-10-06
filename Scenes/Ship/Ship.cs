@@ -11,6 +11,11 @@ public partial class Ship : RigidBody2D
     private const int MOVE_SPEED = 300;
 
     [Export] private PackedScene rocketProjectile;
+    
+    [Export] private Texture2D fullHealthImage;
+    [Export] private Texture2D slightlyDamagedImage;
+    [Export] private Texture2D moderatelyDamagedImage;
+    [Export] private Texture2D severelyDamagedImage;
 
     private Vector2 firePoint;
     private AnimatedSprite2D engineEffects;
@@ -22,6 +27,8 @@ public partial class Ship : RigidBody2D
     private HealthComponent healthComponent;
 
     private AnimationPlayer animPlayer;
+
+    private Sprite2D baseShip;
 
     public override void _Ready()
     {
@@ -42,6 +49,9 @@ public partial class Ship : RigidBody2D
         healthComponent.HealthChanged += HandleHealthChanged;
 
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        baseShip = GetNode<Sprite2D>("BaseShip");
+        baseShip.Texture = fullHealthImage;
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -109,13 +119,43 @@ public partial class Ship : RigidBody2D
             EmitSignal(SignalName.WeaponEquipped, equippedWeapon);
         }
     }
-
-    private async void HandleHealthChanged(int newHealth)
+    
+    private async void ActivateDamageInvulnerability()
     {
         healthComponent.SetInvulnerable(true);
         animPlayer.Play("damage_flash");
         await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
-        healthComponent.SetInvulnerable(false);
+        healthComponent.SetInvulnerable(false);   
+    }
+
+    private void UpdateShipSprite(int currentHealth, int maxHealth)
+    {
+        float normalizedHealth = (float) currentHealth / maxHealth;
+        switch (normalizedHealth)
+        {
+            case > 0 and < .25f:
+                // GD.Print("less than 25% health remaining");
+                baseShip.Texture = severelyDamagedImage;
+                break;
+            case >= .25f and < .75f:
+                // GD.Print("between 25% and 75% health");
+                baseShip.Texture = moderatelyDamagedImage;
+                break;
+            case >= .75f and < 1f:
+                // GD.Print("between 75% and 100% health");
+                baseShip.Texture = slightlyDamagedImage;
+                break;
+            case 1f:
+                // GD.Print("at full health");
+                baseShip.Texture = fullHealthImage;
+                break;
+        }
+    }
+
+    private void HandleHealthChanged(int newHealth)
+    {
+        ActivateDamageInvulnerability();
+        UpdateShipSprite(newHealth, healthComponent.GetMaxHealth());
     }
 
     public BaseWeapon GetEquippedWeapon() => equippedWeapon;
