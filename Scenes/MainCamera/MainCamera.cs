@@ -11,7 +11,10 @@ public partial class MainCamera : Camera2D
 
     public override void _Process(double delta)
     {
-        Position = playerShip.Position.Round();
-        // Position = GetGlobalMousePosition().Round();
+        // find the halfway point between the mouse position and player position
+        Vector2 mousePos = GetGlobalMousePosition().Round();
+        Vector2 playerPos = playerShip.Position.Round();
+        Vector2 halfwayPoint = (mousePos + playerPos) / 2;
+        Position = halfwayPoint;
     }
 }
