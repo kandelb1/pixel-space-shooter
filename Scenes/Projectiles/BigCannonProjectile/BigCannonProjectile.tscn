@@ -1,0 +1,116 @@
+[gd_scene load_steps=18 format=3 uid="uid://bdt28deprqty0"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/BigCannonProjectile/BigCannonProjectile.cs" id="1_3bvet"]
+[ext_resource type="Texture2D" uid="uid://04qbvyc1nqx0" path="res://Assets/Player/Main ship weapon - Projectile - Big Space Gun.png" id="1_iypdw"]
+[ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="2_l5ptx"]
+[ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="3_k32e7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ecrip"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6ei4"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_milk0"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agw2o"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6s4l"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xio8l"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhi3b"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ykjj"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4eod"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyygr"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jagu"]
+atlas = ExtResource("1_iypdw")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63suy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6ei4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_milk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agw2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6s4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xio8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhi3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ykjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4eod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyygr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jagu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bahnt"]
+radius = 9.0
+
+[node name="BigCannonProjectile" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+center_of_mass_mode = 1
+script = ExtResource("1_3bvet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ecrip")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_63suy")
+autoplay = "default"
+frame_progress = 0.510856
+
+[node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("2_l5ptx")]
+lifetimeSeconds = 5.0
+nodeToDelete = NodePath("..")
+
+[node name="ProjectileHitboxComponent" parent="." instance=ExtResource("3_k32e7")]
+collision_layer = 2
+collision_mask = 4
+damage = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
+shape = SubResource("CircleShape2D_bahnt")

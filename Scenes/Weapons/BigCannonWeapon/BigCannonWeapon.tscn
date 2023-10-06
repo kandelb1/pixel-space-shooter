@@ -1,0 +1,107 @@
+[gd_scene load_steps=17 format=3 uid="uid://cdeqgtonx7o8q"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/BigCannonWeapon/BigCannonWeapon.cs" id="1_shmle"]
+[ext_resource type="PackedScene" uid="uid://bdt28deprqty0" path="res://Scenes/Projectiles/BigCannonProjectile/BigCannonProjectile.tscn" id="2_8i0ta"]
+[ext_resource type="Texture2D" uid="uid://ce5lqwhula0yy" path="res://Assets/Player/Main Ship - Weapons - Big Space Gun.png" id="2_yrped"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kmo0"]
+atlas = ExtResource("2_yrped")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj48p"]
+atlas = ExtResource("2_yrped")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvl5"]
+atlas = ExtResource("2_yrped")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjqpv"]
+atlas = ExtResource("2_yrped")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jngo6"]
+atlas = ExtResource("2_yrped")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrfbe"]
+atlas = ExtResource("2_yrped")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds5v5"]
+atlas = ExtResource("2_yrped")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6lam"]
+atlas = ExtResource("2_yrped")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bgib"]
+atlas = ExtResource("2_yrped")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g3cd"]
+atlas = ExtResource("2_yrped")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcycj"]
+atlas = ExtResource("2_yrped")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy5tv"]
+atlas = ExtResource("2_yrped")
+region = Rect2(528, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1b2eu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kmo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj48p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bvl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjqpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jngo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrfbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds5v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6lam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bgib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g3cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcycj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy5tv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BigCannonWeapon" type="Node2D"]
+script = ExtResource("1_shmle")
+bigCannonProjectileScene = ExtResource("2_8i0ta")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1b2eu")
+
+[node name="FirePoint" type="Node2D" parent="."]
+position = Vector2(0, -22)

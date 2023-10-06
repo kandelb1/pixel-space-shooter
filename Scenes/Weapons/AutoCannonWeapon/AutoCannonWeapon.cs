@@ -3,7 +3,7 @@ using System;
 
 public partial class AutoCannonWeapon : BaseWeapon
 {
-    [Export] private PackedScene autoCannonProjectile;
+    [Export] private PackedScene autoCannonProjectile; // TODO: be consistent with PackedScene naming: add 'scene' to the end
     [Export] private RigidBody2D ship;
     
     private AnimatedSprite2D animSprite;
