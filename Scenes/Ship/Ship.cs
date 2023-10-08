@@ -17,6 +17,8 @@ public partial class Ship : RigidBody2D
     [Export] private Texture2D moderatelyDamagedImage;
     [Export] private Texture2D severelyDamagedImage;
 
+    [Export] private HomePlanet homePlanet;
+
     private Vector2 firePoint;
     private AnimatedSprite2D engineEffects;
 
@@ -29,6 +31,8 @@ public partial class Ship : RigidBody2D
     private AnimationPlayer animPlayer;
 
     private Sprite2D baseShip;
+
+    private bool dead;
 
     public override void _Ready()
     {
@@ -47,6 +51,7 @@ public partial class Ship : RigidBody2D
 
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         healthComponent.HealthChanged += HandleHealthChanged;
+        healthComponent.HealthZero += HandleHealthZero;
 
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
@@ -78,6 +83,14 @@ public partial class Ship : RigidBody2D
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
+        if (dead) // unfortunately we can't set the position of a rigidbody2d anytime we want. we have to do it inside of _IntegrateForces()
+        {
+            healthComponent.Heal(healthComponent.GetMaxHealth());
+            state.Transform = new Transform2D(0, homePlanet.GetSpawnPosition());
+            dead = false;
+            Show();
+            return;
+        }
         LookFollow(state, GetGlobalMousePosition());
         bool moving = false;
         
@@ -156,6 +169,12 @@ public partial class Ship : RigidBody2D
     {
         ActivateDamageInvulnerability();
         UpdateShipSprite(newHealth, healthComponent.GetMaxHealth());
+    }
+
+    private void HandleHealthZero()
+    {
+        dead = true;
+        Hide();
     }
 
     public BaseWeapon GetEquippedWeapon() => equippedWeapon;

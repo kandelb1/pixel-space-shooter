@@ -5,7 +5,7 @@ public partial class HealthComponent : Node
 {
 
     [Signal]
-    public delegate void HealthChangedEventHandler(int newHealth); // TODO: rename to DamageTaken?
+    public delegate void HealthChangedEventHandler(int newHealth);
 
     [Signal]
     public delegate void HealthZeroEventHandler();
@@ -37,6 +37,13 @@ public partial class HealthComponent : Node
             currentHealth = 0;
             EmitSignal(SignalName.HealthZero);
         }
+        EmitSignal(SignalName.HealthChanged, currentHealth);
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
         EmitSignal(SignalName.HealthChanged, currentHealth);
     }
 }

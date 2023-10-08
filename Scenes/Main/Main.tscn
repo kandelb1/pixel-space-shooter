@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=32 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
 [ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="5_p8a5o"]
+[ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_t5p5p"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
@@ -155,7 +156,12 @@ animations = [{
 
 [node name="Main" type="Node"]
 
-[node name="Ship" parent="." instance=ExtResource("1_01vvk")]
+[node name="HomePlanet" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("6_eotbu")]
+position = Vector2(388, 301)
+playerShip = NodePath("../Ship")
+
+[node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
+homePlanet = NodePath("../HomePlanet")
 
 [node name="ScoutShip" parent="." instance=ExtResource("2_hcjv6")]
 position = Vector2(-262, 143)
@@ -178,6 +184,12 @@ position = Vector2(111, 68)
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
 playerShip = NodePath("../Ship")
 
+[node name="TorpedoShip" parent="." instance=ExtResource("5_p8a5o")]
+position = Vector2(-194, 31)
+
+[node name="DreadnoughtShip" parent="." instance=ExtResource("6_t5p5p")]
+position = Vector2(-115, -83)
+
 [node name="ScreenUI" type="CanvasLayer" parent="."]
 
 [node name="PlayerHealthBar" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("3_7bthx")]
@@ -185,12 +197,6 @@ playerShip = NodePath("../../Ship")
 
 [node name="WeaponSelectUI" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("5_nj484")]
 playerShip = NodePath("../../Ship")
-
-[node name="TorpedoShip" parent="." instance=ExtResource("5_p8a5o")]
-position = Vector2(-194, 31)
-
-[node name="DreadnoughtShip" parent="." instance=ExtResource("6_t5p5p")]
-position = Vector2(-115, -83)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
