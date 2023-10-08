@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=33 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
+[ext_resource type="PackedScene" uid="uid://bvasutaecaj4k" path="res://Scenes/Spawners/EnemySpawner/EnemySpawner.tscn" id="12_37h5b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -159,6 +160,10 @@ animations = [{
 [node name="HomePlanet" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("6_eotbu")]
 position = Vector2(388, 301)
 playerShip = NodePath("../Ship")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("12_37h5b")]
+position = Vector2(133, 286)
+scoutShipScene = ExtResource("2_hcjv6")
 
 [node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
 homePlanet = NodePath("../HomePlanet")
