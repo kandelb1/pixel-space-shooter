@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class FrigateShip : RigidBody2D
+public partial class BattlescruiserShip : RigidBody2D
 {
-    [Export] private PackedScene bigBulletScene;
+    [Export] private PackedScene shipToDeployScene;
+    
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
     
@@ -14,15 +15,18 @@ public partial class FrigateShip : RigidBody2D
     private Node2D uiNode;
     
     private Node2D player;
-    
-    private List<Vector2> firePoints;
+
+    private List<Vector2> deployPoints;
+    private Dictionary<int, Vector2> frameToDeployPoint; // maps animation frame indices to the deploy position (in local coords)
+    private bool deployedShips;
     
     private bool dead;
-    
+
     public override void _Ready()
     {
         ship = GetNode<AnimatedSprite2D>("Ship");
         ship.FrameChanged += HandleFrameChanged;
+        ship.AnimationFinished += HandleAnimationFinished;
         engine = GetNode<AnimatedSprite2D>("Ship/Engine");
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         sightRadiusComponent = GetNode<SightRadiusComponent>("SightRadiusComponent");
@@ -32,9 +36,21 @@ public partial class FrigateShip : RigidBody2D
         
         uiNode = GetNode<Node2D>("UI");
         player = (Node2D) GetTree().GetFirstNodeInGroup("player");
-        firePoints = GetNode("BulletFirePoints").GetChildren().Cast<Node2D>().Select(x => x.Position).ToList();
+        deployPoints = GetNode("ShipDeployPoints").GetChildren().Cast<Node2D>().Select(x => x.Position).ToList();
+        
+        frameToDeployPoint = new Dictionary<int, Vector2>();
+        // right side
+        frameToDeployPoint.Add(2, deployPoints[0]);
+        frameToDeployPoint.Add(4, deployPoints[1]);
+        frameToDeployPoint.Add(10, deployPoints[0]);
+        frameToDeployPoint.Add(12, deployPoints[1]);
+        // left side
+        frameToDeployPoint.Add(17, deployPoints[2]);
+        frameToDeployPoint.Add(19, deployPoints[3]);
+        frameToDeployPoint.Add(25, deployPoints[2]);
+        frameToDeployPoint.Add(27, deployPoints[3]);
     }
-
+    
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
     {
         Vector2 dirToTarget = (targetPosition - Position).Normalized();
@@ -57,34 +73,37 @@ public partial class FrigateShip : RigidBody2D
     {
         Vector2 targetPos = player.Position;
         LookFollow(state, targetPos);
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 75f;
+        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 25f;
     }
 
     private void HandleFrameChanged()
     {
+        if (ship.Animation != "deploy") return;
         int frame = ship.Frame;
-        if (ship.Animation == "shoot" && frame is 1 or 3)
+        if (frameToDeployPoint.TryGetValue(frame, out Vector2 deployPoint))
         {
-            for (int i = frame - 1; i <= frame; i++)
-            {
-                BigBullet bullet = bigBulletScene.Instantiate<BigBullet>();
-                bullet.SetStartPosition(ToGlobal(firePoints[i]));
-                bullet.SetStartRotation(Rotation);
-                GetNode("/root").AddChild(bullet);
-            }
+            RigidBody2D deployShip = shipToDeployScene.Instantiate<RigidBody2D>(); // all ships are rigidbody2ds 
+            deployShip.Position = ToGlobal(deployPoint);
+            GetNode("/root").AddChild(deployShip);
         }
+    }
+
+    private void HandleAnimationFinished()
+    {
+        if(ship.Animation == "deploy") ship.Play("default");
     }
 
     private void HandleEnemyInRange(Node2D body)
     {
-        if (dead) return;
-        ship.Play("shoot");
+        if (dead || deployedShips) return;
+        ship.Play("deploy");
+        deployedShips = true;
     }
 
     private void HandleEnemyExitedRange(Node2D body)
     {
-        if (dead) return;
-        ship.Play("default");
+        // if (dead) return;
+        // ship.Play("default");
     }
     
     public async void Destroy()

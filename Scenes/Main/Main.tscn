@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=33 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
 [ext_resource type="PackedScene" uid="uid://bvasutaecaj4k" path="res://Scenes/Spawners/EnemySpawner/EnemySpawner.tscn" id="10_gh4ck"]
 [ext_resource type="PackedScene" uid="uid://c7ci7eikcgo37" path="res://Scenes/Enemies/FrigateShip/FrigateShip.tscn" id="11_teyxu"]
+[ext_resource type="PackedScene" uid="uid://bjp45cju3gbwf" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.tscn" id="12_3s821"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="12_g5tfl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
@@ -161,6 +162,7 @@ position = Vector2(388, 301)
 playerShip = NodePath("../Ship")
 
 [node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
+position = Vector2(73, -391)
 homePlanet = NodePath("../HomePlanet")
 
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
@@ -210,3 +212,6 @@ position = Vector2(-630, -124)
 
 [node name="FrigateShip" parent="." instance=ExtResource("11_teyxu")]
 position = Vector2(93, 310)
+
+[node name="BattlecruiserShip" parent="." instance=ExtResource("12_3s821")]
+position = Vector2(308, -383)
