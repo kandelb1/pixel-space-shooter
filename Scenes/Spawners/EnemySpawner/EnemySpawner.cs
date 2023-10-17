@@ -26,7 +26,6 @@ public partial class EnemySpawner : AnimatedSprite2D
         // lets do scout ships for now
         ScoutShip enemy = scoutShipScene.Instantiate<ScoutShip>();
         enemy.Position = Position;
-        enemy.AddConstantForce(new Vector2(0, 1) * 50f); // TODO: need to add AI behavior to enemies
         GetNode("/root").AddChild(enemy);
     }
 }

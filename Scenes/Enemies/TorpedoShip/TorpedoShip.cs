@@ -66,14 +66,19 @@ public partial class TorpedoShip : RigidBody2D
         {
             rotationAngle += Mathf.Pi * 2;
         }
-        
-        state.AngularVelocity = (rotationAngle / state.Step) * ROTATION_SPEED;
+
+        state.AngularVelocity = rotationAngle / state.Step;
+        if (ship.Animation == "shoot" || firedAllTorpedoes)
+        {
+            state.AngularVelocity *= ROTATION_SPEED;
+        }
     }
     
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
         Vector2 targetPos = player.Position;
         LookFollow(state, targetPos);
+        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 50f;
     }
 
     private async void Destroy()

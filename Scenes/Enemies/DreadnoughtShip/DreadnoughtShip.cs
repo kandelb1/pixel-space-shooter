@@ -22,6 +22,7 @@ public partial class DreadnoughtShip : RigidBody2D
     private Line2D deathRay;
     private PersistentHitboxComponent deathRayHitbox;
     private CollisionShape2D deathRayCollisionShape;
+    private bool playerInRange;
     private bool deathRayFiring;
     private Timer deathRayCooldownTimer;
 
@@ -40,6 +41,7 @@ public partial class DreadnoughtShip : RigidBody2D
         healthComponent.HealthZero += Destroy;
         sightRadiusComponent = GetNode<SightRadiusComponent>("SightRadiusComponent");
         sightRadiusComponent.EnteredSightRadius += HandleEnemyInRange;
+        sightRadiusComponent.ExitedSightRadius += HandleEnemyExitedRange;
 
         player = (Node2D) GetTree().GetFirstNodeInGroup("player");
         
@@ -47,6 +49,7 @@ public partial class DreadnoughtShip : RigidBody2D
         deathRayHitbox = GetNode<PersistentHitboxComponent>("DeathRay/PersistentHitboxComponent");
         deathRayCollisionShape = GetNode<CollisionShape2D>("DeathRay/PersistentHitboxComponent/CollisionShape2D");
         deathRayCooldownTimer = GetNode<Timer>("DeathRay/CooldownTimer");
+        deathRayCooldownTimer.Timeout += HandleCooldownOver;
         ToggleDeathRay(false);
     }
     
@@ -65,7 +68,11 @@ public partial class DreadnoughtShip : RigidBody2D
             rotationAngle += Mathf.Pi * 2;
         }
 
-        state.AngularVelocity = rotationAngle / state.Step * ROTATION_SPEED;
+        state.AngularVelocity = rotationAngle / state.Step;
+        if (ship.Animation == "shoot")
+        {
+            state.AngularVelocity *= ROTATION_SPEED;
+        }
     }
     
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -125,9 +132,26 @@ public partial class DreadnoughtShip : RigidBody2D
         }
     }
 
-    private async void HandleEnemyInRange(Node2D body)
+    private void HandleEnemyInRange(Node2D body)
     {
         if (dead) return;
+        playerInRange = true;
+        TryFireDeathRay();
+    }
+
+    private void HandleEnemyExitedRange(Node2D body)
+    {
+        playerInRange = false;
+    }
+
+    private void HandleCooldownOver()
+    {
+        TryFireDeathRay();
+    }
+
+    private async void TryFireDeathRay()
+    {
+        if (!playerInRange) return;
         if (deathRayFiring || deathRayCooldownTimer.TimeLeft > 0) return;
         ship.Play("shoot");
         deathRayFiring = true;

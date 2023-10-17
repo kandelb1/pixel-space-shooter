@@ -1,17 +1,15 @@
-[gd_scene load_steps=33 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=31 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
-[ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_hcjv6"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
 [ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
-[ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="5_p8a5o"]
 [ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
-[ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_t5p5p"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
-[ext_resource type="PackedScene" uid="uid://bvasutaecaj4k" path="res://Scenes/Spawners/EnemySpawner/EnemySpawner.tscn" id="12_37h5b"]
+[ext_resource type="PackedScene" uid="uid://bvasutaecaj4k" path="res://Scenes/Spawners/EnemySpawner/EnemySpawner.tscn" id="10_gh4ck"]
+[ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="12_g5tfl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -161,39 +159,11 @@ animations = [{
 position = Vector2(388, 301)
 playerShip = NodePath("../Ship")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("12_37h5b")]
-position = Vector2(133, 286)
-scoutShipScene = ExtResource("2_hcjv6")
-
 [node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
 homePlanet = NodePath("../HomePlanet")
 
-[node name="ScoutShip" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(-262, 143)
-
-[node name="ScoutShip2" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(-245, -123)
-
-[node name="ScoutShip3" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(-6, -123)
-
-[node name="ScoutShip4" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(79, -129)
-
-[node name="ScoutShip5" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(112, -69)
-
-[node name="ScoutShip6" parent="." instance=ExtResource("2_hcjv6")]
-position = Vector2(111, 68)
-
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
 playerShip = NodePath("../Ship")
-
-[node name="TorpedoShip" parent="." instance=ExtResource("5_p8a5o")]
-position = Vector2(-194, 31)
-
-[node name="DreadnoughtShip" parent="." instance=ExtResource("6_t5p5p")]
-position = Vector2(-115, -83)
 
 [node name="ScreenUI" type="CanvasLayer" parent="."]
 
@@ -230,3 +200,9 @@ motion_mirroring = Vector2(640, 360)
 sprite_frames = SubResource("SpriteFrames_t1ctn")
 autoplay = "default"
 centered = false
+
+[node name="EnemySpawner" parent="." instance=ExtResource("10_gh4ck")]
+position = Vector2(299, 80)
+
+[node name="DreadnoughtShip" parent="." instance=ExtResource("12_g5tfl")]
+position = Vector2(-630, -124)

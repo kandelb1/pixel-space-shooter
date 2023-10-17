@@ -3,7 +3,7 @@ using Godot;
 public partial class ScoutShip : RigidBody2D
 {
     [Export] private PackedScene bullet;
-    
+
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
 
@@ -17,7 +17,7 @@ public partial class ScoutShip : RigidBody2D
     private HurtboxComponent hurtboxComponent;
 
     private SightRadiusComponent sightRadiusComponent;
-    
+
     public override void _Ready()
     {
         ship = GetNode<AnimatedSprite2D>("Ship");
@@ -63,6 +63,7 @@ public partial class ScoutShip : RigidBody2D
     {
         Vector2 targetPos = ((Node2D) GetTree().GetFirstNodeInGroup("player")).Position;
         LookFollow(state, targetPos);
+        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 100f;
     }
 
     public async void Destroy()
