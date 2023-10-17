@@ -61,13 +61,14 @@ shape = SubResource("RectangleShape2D_0wmhl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u244x")
 autoplay = "default"
-frame_progress = 0.766388
+frame_progress = 0.502481
 
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_veynt")]
 lifetimeSeconds = 3.0
 nodeToDelete = NodePath("..")
 
 [node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_3newp")]
+visible = false
 collision_layer = 8
 damage = 1
 

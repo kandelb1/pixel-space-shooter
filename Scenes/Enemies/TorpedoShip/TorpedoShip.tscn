@@ -459,6 +459,7 @@ maxHealth = 6
 
 [node name="SightRadiusComponent" parent="." instance=ExtResource("6_vkne8")]
 visible = false
+collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_h371h")

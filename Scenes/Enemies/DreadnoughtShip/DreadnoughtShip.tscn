@@ -816,6 +816,7 @@ remote_path = NodePath("../UI")
 update_rotation = false
 
 [node name="SightRadiusComponent" parent="." instance=ExtResource("15_iqa2v")]
+collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_a67lw")

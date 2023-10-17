@@ -556,7 +556,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_gxbs8"]
 radius = 32.0
 
-[node name="HomePlanet" type="AnimatedSprite2D"]
+[node name="HomePlanet" type="AnimatedSprite2D" groups=["planets"]]
 sprite_frames = SubResource("SpriteFrames_3ofca")
 autoplay = "default"
 frame_progress = 0.276748
