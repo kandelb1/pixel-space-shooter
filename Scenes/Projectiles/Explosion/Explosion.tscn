@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://h6ay0nvpptm0"]
+
+[ext_resource type="Texture2D" uid="uid://dr1qdtlw7h21m" path="res://Assets/Explosions/biggerboom-upscaled.png" id="1_dvbjj"]
+[ext_resource type="Script" path="res://Scenes/Projectiles/Explosion/Explosion.cs" id="2_ckrbh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5blr2"]
+atlas = ExtResource("1_dvbjj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktgxv"]
+atlas = ExtResource("1_dvbjj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi0jx"]
+atlas = ExtResource("1_dvbjj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty5qp"]
+atlas = ExtResource("1_dvbjj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0fxv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5blr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktgxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi0jx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty5qp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_60wge"]
+radius = 68.0
+
+[node name="Explosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0fxv8")
+autoplay = "default"
+script = ExtResource("2_ckrbh")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_60wge")
