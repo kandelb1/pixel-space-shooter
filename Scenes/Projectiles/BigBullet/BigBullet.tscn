@@ -69,6 +69,7 @@ nodeToDelete = NodePath("..")
 [node name="ProjectileHitboxComponent" parent="." instance=ExtResource("3_agap3")]
 visible = false
 collision_layer = 8
+damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitboxComponent"]
 position = Vector2(0, 2)

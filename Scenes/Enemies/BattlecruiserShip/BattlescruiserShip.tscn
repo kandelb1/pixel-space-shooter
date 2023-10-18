@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.cs" id="1_d0cgd"]
 [ext_resource type="Texture2D" uid="uid://c2ci6jbibtwij" path="res://Assets/Battlecruiser/Kla'ed - Battlecruiser - Base.png" id="1_hl1xq"]
 [ext_resource type="Texture2D" uid="uid://jpagjtusvq6n" path="res://Assets/Battlecruiser/Kla'ed - Battlecruiser - Destruction.png" id="2_3qh5l"]
+[ext_resource type="PackedScene" uid="uid://civ46vgnbtg2v" path="res://Scenes/Enemies/FighterShip/FighterShip.tscn" id="2_8q2ui"]
 [ext_resource type="Texture2D" uid="uid://dnssjdkt7dub8" path="res://Assets/Battlecruiser/Kla'ed - Battlecruiser - Weapons.png" id="2_b488a"]
-[ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_rjbc7"]
 [ext_resource type="Texture2D" uid="uid://d34n2yhqm7jql" path="res://Assets/Battlecruiser/Kla'ed - Battlecruiser - Engine.png" id="3_b7mg1"]
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="5_qlaqp"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="6_bmsef"]
@@ -226,7 +226,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1t7if")
 }, {
-"duration": 1.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_fax1q")
 }, {
 "duration": 1.0,
@@ -271,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_min2e")
 }, {
-"duration": 1.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_c4sr0")
 }, {
 "duration": 1.0,
@@ -452,7 +452,7 @@ collision_layer = 0
 collision_mask = 0
 center_of_mass_mode = 1
 script = ExtResource("1_d0cgd")
-shipToDeployScene = ExtResource("2_rjbc7")
+shipToDeployScene = ExtResource("2_8q2ui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -462,21 +462,22 @@ shape = SubResource("RectangleShape2D_kmsq2")
 [node name="ShipDeployPoints" type="Node2D" parent="."]
 
 [node name="1" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(25, -2)
+position = Vector2(40, -7)
 
 [node name="2" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(25, -41)
+position = Vector2(14, -30)
 
 [node name="3" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(-29, 0)
+position = Vector2(-39, -8)
 
 [node name="4" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(-29, -43)
+position = Vector2(-12, -31)
 
 [node name="Ship" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ifw06")
 animation = &"deploy"
 autoplay = "default"
+frame = 22
 
 [node name="Engine" type="AnimatedSprite2D" parent="Ship"]
 top_level = true
@@ -509,6 +510,7 @@ update_rotation = false
 
 [node name="SightRadiusComponent" parent="." instance=ExtResource("8_oivvm")]
 visible = false
+collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_7prwm")
