@@ -3,7 +3,8 @@ using System;
 
 public partial class EnemySpawner : AnimatedSprite2D
 {
-    [Export] private PackedScene scoutShipScene;
+    [Export] private PackedScene shipScene;
+    [Export] private float spawnTime = 3f;
 
     private Timer spawnTimer;
     private TextureProgressBar progressBar;
@@ -11,7 +12,9 @@ public partial class EnemySpawner : AnimatedSprite2D
     public override void _Ready()
     {
         spawnTimer = GetNode<Timer>("SpawnTimer");
+        spawnTimer.WaitTime = spawnTime;
         spawnTimer.Timeout += SpawnEnemy;
+        spawnTimer.Start();
         progressBar = GetNode<TextureProgressBar>("SpawnProgressBar");
     }
 
@@ -23,8 +26,7 @@ public partial class EnemySpawner : AnimatedSprite2D
 
     private void SpawnEnemy()
     {
-        // lets do scout ships for now
-        ScoutShip enemy = scoutShipScene.Instantiate<ScoutShip>();
+        RigidBody2D enemy = shipScene.Instantiate<RigidBody2D>();
         enemy.Position = Position;
         GetNode("/root").AddChild(enemy);
     }
