@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcu5elxn4xkd4"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PlayerShieldBar/PlayerShieldBar.cs" id="1_8fi8y"]
+[ext_resource type="Texture2D" uid="uid://caqruy56x2xxx" path="res://Assets/UI/All.png" id="1_jr41k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a78sf"]
+atlas = ExtResource("1_jr41k")
+region = Rect2(1104, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36kja"]
+atlas = ExtResource("1_jr41k")
+region = Rect2(912, 16, 48, 16)
+
+[node name="PlayerShieldBar" type="HBoxContainer"]
+offset_right = 87.0
+offset_bottom = 20.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_8fi8y")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Shield"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.3
+texture_under = SubResource("AtlasTexture_a78sf")
+texture_progress = SubResource("AtlasTexture_36kja")

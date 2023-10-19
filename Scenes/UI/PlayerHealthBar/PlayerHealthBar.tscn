@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://de804x3dac4v6"]
 
-[ext_resource type="Texture2D" uid="uid://bm076dchn7new" path="res://Assets/UI/All.png" id="1_6vmcl"]
+[ext_resource type="Texture2D" uid="uid://caqruy56x2xxx" path="res://Assets/UI/All.png" id="1_6vmcl"]
 [ext_resource type="Script" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.cs" id="1_o68ey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a30rc"]
@@ -12,8 +12,8 @@ atlas = ExtResource("1_6vmcl")
 region = Rect2(912, 64, 48, 16)
 
 [node name="PlayerHealthBar" type="HBoxContainer"]
-offset_right = 96.0
-offset_bottom = 28.0
+offset_right = 91.0
+offset_bottom = 20.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_o68ey")

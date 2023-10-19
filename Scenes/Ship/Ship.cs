@@ -10,6 +10,7 @@ public partial class Ship : RigidBody2D
     public delegate void WeaponEquippedEventHandler(BaseWeapon weapon);
 
     private const int MOVE_SPEED = 300;
+    public const float MAX_SHIELD_TIME = 5.0f;
 
     [Export] private PackedScene rocketProjectile;
     
@@ -37,9 +38,11 @@ public partial class Ship : RigidBody2D
 
     private AnimatedSprite2D shield;
     private ShieldComponent shieldComponent;
-    private float shieldTimeRemaining = 5.0f;
+    
+    // lets be inconsistent and use properties (because I want to)
+    public float ShieldTimeRemaining { get; private set; } = MAX_SHIELD_TIME;
+    public bool ShieldRecharging { get; private set; }
     private bool shieldActive;
-    private bool shieldRecharging;
 
     public override void _Ready()
     {
@@ -146,7 +149,7 @@ public partial class Ship : RigidBody2D
 
         if (@event.IsAction("activate_shield"))
         {
-            if (shieldRecharging) return;
+            if (ShieldRecharging) return;
             shieldActive = @event.IsPressed();
             ToggleShield(shieldActive);
         }
@@ -156,23 +159,23 @@ public partial class Ship : RigidBody2D
     {
         if (shieldActive)
         {
-            shieldTimeRemaining -= (float) delta;
-            if (shieldTimeRemaining <= 0)
+            ShieldTimeRemaining -= (float) delta;
+            if (ShieldTimeRemaining <= 0)
             {
-                shieldRecharging = true;
+                ShieldRecharging = true;
                 shieldActive = false;
                 ToggleShield(false);
             }
         }else
         {
-            shieldTimeRemaining += (float) delta;
-            if (shieldTimeRemaining >= 5f)
+            ShieldTimeRemaining += (float) delta;
+            if (ShieldTimeRemaining >= MAX_SHIELD_TIME)
             {
-                shieldRecharging = false;
-                shieldTimeRemaining = 5f;
+                ShieldRecharging = false;
+                ShieldTimeRemaining = MAX_SHIELD_TIME;
             }
         }
-        GD.Print($"Shield time remaining: {shieldTimeRemaining}");
+        GD.Print($"Shield time remaining: {ShieldTimeRemaining}");
     }
 
     private void ToggleShield(bool active)
