@@ -8,9 +8,18 @@ public partial class ShieldComponent : Area2D
         AreaEntered += HandleAreaEntered;
     }
 
+    public void ToggleShield(bool active)
+    {
+        Monitoring = active;
+        Monitorable = active;
+    }
+
     private void HandleAreaEntered(Area2D other)
     {
         // basic shield that deletes any projectile that enters it
-        other.Owner.Free();
+        if (other is ProjectileHitboxComponent projectileHitbox)
+        {
+            projectileHitbox.Owner.Free();    
+        }
     }
 }

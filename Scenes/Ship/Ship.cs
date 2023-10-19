@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 public partial class Ship : RigidBody2D
@@ -34,6 +35,12 @@ public partial class Ship : RigidBody2D
 
     private bool dead;
 
+    private AnimatedSprite2D shield;
+    private ShieldComponent shieldComponent;
+    private float shieldTimeRemaining = 5.0f;
+    private bool shieldActive;
+    private bool shieldRecharging;
+
     public override void _Ready()
     {
         firePoint = GetNode<Node2D>("FirePoint").Position;
@@ -57,6 +64,11 @@ public partial class Ship : RigidBody2D
 
         baseShip = GetNode<Sprite2D>("BaseShip");
         baseShip.Texture = fullHealthImage;
+
+        shield = GetNode<AnimatedSprite2D>("BaseShip/Shield");
+        shield.Visible = shieldActive;
+        shieldComponent = GetNode<ShieldComponent>("BaseShip/Shield/ShieldComponent");
+        shieldComponent.ToggleShield(shieldActive);
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -131,8 +143,44 @@ public partial class Ship : RigidBody2D
             equippedWeapon.SetEquipped(true);
             EmitSignal(SignalName.WeaponEquipped, equippedWeapon);
         }
+
+        if (@event.IsAction("activate_shield"))
+        {
+            if (shieldRecharging) return;
+            shieldActive = @event.IsPressed();
+            ToggleShield(shieldActive);
+        }
     }
-    
+
+    public override void _Process(double delta)
+    {
+        if (shieldActive)
+        {
+            shieldTimeRemaining -= (float) delta;
+            if (shieldTimeRemaining <= 0)
+            {
+                shieldRecharging = true;
+                shieldActive = false;
+                ToggleShield(false);
+            }
+        }else
+        {
+            shieldTimeRemaining += (float) delta;
+            if (shieldTimeRemaining >= 5f)
+            {
+                shieldRecharging = false;
+                shieldTimeRemaining = 5f;
+            }
+        }
+        GD.Print($"Shield time remaining: {shieldTimeRemaining}");
+    }
+
+    private void ToggleShield(bool active)
+    {
+        shield.Visible = active;
+        shieldComponent.ToggleShield(active);
+    }
+
     private async void ActivateDamageInvulnerability()
     {
         healthComponent.SetInvulnerable(true);

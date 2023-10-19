@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://hqqlksqhi03j"]
+[gd_scene load_steps=43 format=3 uid="uid://hqqlksqhi03j"]
 
 [ext_resource type="Script" path="res://Scenes/Ship/Ship.cs" id="2_lmpg3"]
 [ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_x7te5"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="7_12o86"]
 [ext_resource type="Texture2D" uid="uid://ci331cjf7h8oh" path="res://Assets/Player/Main Ship - Engines - Base Engine - Spritesheet.png" id="7_apa0s"]
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="8_v583v"]
+[ext_resource type="Texture2D" uid="uid://kv75txua5wh5" path="res://Assets/Player/Main Ship - Shields - Round Shield.png" id="12_vby0i"]
+[ext_resource type="PackedScene" uid="uid://cr48uy7s0vfdc" path="res://Scenes/Components/ShieldComponent/ShieldComponent.tscn" id="13_hu1bu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n0crt"]
 radius = 18.0
@@ -78,6 +80,101 @@ animations = [{
 "name": &"moving",
 "speed": 12.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8s0f"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e28kp"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0v0t"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvq18"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op5pw"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lffb"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6aps"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhe2w"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq0c8"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnw7r"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnwkg"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urh62"]
+atlas = ExtResource("12_vby0i")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qlko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8s0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e28kp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0v0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvq18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_op5pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lffb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6aps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhe2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tq0c8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnw7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urh62")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7s1i"]
+radius = 28.0179
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4iwxo"]
 radius = 17.0
@@ -167,6 +264,24 @@ texture = ExtResource("6_r6rkh")
 show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_dpgw8")
 animation = &"idle"
+
+[node name="Shield" type="AnimatedSprite2D" parent="BaseShip"]
+sprite_frames = SubResource("SpriteFrames_2qlko")
+autoplay = "default"
+frame_progress = 0.705301
+
+[node name="ShieldComponent" parent="BaseShip/Shield" instance=ExtResource("13_hu1bu")]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseShip/Shield/ShieldComponent"]
+shape = SubResource("CircleShape2D_d7s1i")
+
+[node name="ShieldTimeRemaining" type="Timer" parent="BaseShip/Shield"]
+
+[node name="ShieldRechargeCooldown" type="Timer" parent="BaseShip/Shield"]
+wait_time = 3.0
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("7_12o86")]
 visible = false

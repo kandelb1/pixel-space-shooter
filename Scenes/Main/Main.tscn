@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=30 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
+[ext_resource type="PackedScene" uid="uid://c7ci7eikcgo37" path="res://Scenes/Enemies/FrigateShip/FrigateShip.tscn" id="9_1cyte"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
-[ext_resource type="PackedScene" uid="uid://bvasutaecaj4k" path="res://Scenes/Spawners/EnemySpawner/EnemySpawner.tscn" id="10_gh4ck"]
-[ext_resource type="PackedScene" uid="uid://bjp45cju3gbwf" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.tscn" id="12_3s821"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -160,7 +159,7 @@ position = Vector2(388, 301)
 playerShip = NodePath("../Ship")
 
 [node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
-position = Vector2(73, -391)
+position = Vector2(-149, 83)
 homePlanet = NodePath("../HomePlanet")
 
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
@@ -202,8 +201,5 @@ sprite_frames = SubResource("SpriteFrames_t1ctn")
 autoplay = "default"
 centered = false
 
-[node name="EnemySpawner" parent="." instance=ExtResource("10_gh4ck")]
-position = Vector2(299, 80)
-
-[node name="BattlecruiserShip" parent="." instance=ExtResource("12_3s821")]
-position = Vector2(334, -288)
+[node name="FrigateShip" parent="." instance=ExtResource("9_1cyte")]
+position = Vector2(195, 105)
