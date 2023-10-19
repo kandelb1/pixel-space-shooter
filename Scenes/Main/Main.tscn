@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=32 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
 [ext_resource type="PackedScene" uid="uid://c7ci7eikcgo37" path="res://Scenes/Enemies/FrigateShip/FrigateShip.tscn" id="9_1cyte"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
+[ext_resource type="PackedScene" uid="uid://bayfh17skg8ad" path="res://Scenes/WorldBoundary/WorldBoundary.tscn" id="11_m5r3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -160,7 +161,7 @@ position = Vector2(388, 301)
 playerShip = NodePath("../Ship")
 
 [node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
-position = Vector2(-149, 83)
+position = Vector2(325, 293)
 homePlanet = NodePath("../HomePlanet")
 
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
@@ -212,4 +213,13 @@ autoplay = "default"
 centered = false
 
 [node name="FrigateShip" parent="." instance=ExtResource("9_1cyte")]
-position = Vector2(195, 105)
+position = Vector2(-1355, -815)
+
+[node name="FrigateShip2" parent="." instance=ExtResource("9_1cyte")]
+position = Vector2(320, 1731)
+
+[node name="FrigateShip3" parent="." instance=ExtResource("9_1cyte")]
+position = Vector2(2880, 214)
+
+[node name="WorldBoundary" parent="." instance=ExtResource("11_m5r3d")]
+position = Vector2(-1027, -128)

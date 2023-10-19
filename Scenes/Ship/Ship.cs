@@ -175,7 +175,6 @@ public partial class Ship : RigidBody2D
                 ShieldTimeRemaining = MAX_SHIELD_TIME;
             }
         }
-        GD.Print($"Shield time remaining: {ShieldTimeRemaining}");
     }
 
     private void ToggleShield(bool active)

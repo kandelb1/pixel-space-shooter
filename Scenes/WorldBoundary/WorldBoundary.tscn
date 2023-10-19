@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://bayfh17skg8ad"]
+
+[ext_resource type="Script" path="res://Scenes/WorldBoundary/WorldBoundary.cs" id="1_7igg5"]
+[ext_resource type="Texture2D" uid="uid://cfbjwlaseclr" path="res://Assets/Background/world-boundary.png" id="1_wwiqq"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mosy3"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_83k2c"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nxpjx"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o6tse"]
+normal = Vector2(-1, 0)
+
+[node name="WorldBoundary" type="Node2D"]
+script = ExtResource("1_7igg5")
+
+[node name="Left" type="Sprite2D" parent="."]
+position = Vector2(-1543, 322)
+scale = Vector2(1, 40)
+texture = ExtResource("1_wwiqq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Left"]
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left/StaticBody2D"]
+position = Vector2(6, -0.0500002)
+shape = SubResource("WorldBoundaryShape2D_mosy3")
+
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(1450, -1670)
+rotation = 1.5708
+scale = Vector2(1, 60)
+texture = ExtResource("1_wwiqq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Top"]
+position = Vector2(6, 1.90735e-06)
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_83k2c")
+
+[node name="Right" type="Sprite2D" parent="."]
+position = Vector2(4442, 323)
+scale = Vector2(1, 40)
+texture = ExtResource("1_wwiqq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Right"]
+position = Vector2(-6, -0.0249996)
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_nxpjx")
+
+[node name="Bottom" type="Sprite2D" parent="."]
+position = Vector2(1450, 2314)
+rotation = 1.5708
+scale = Vector2(1, 60)
+texture = ExtResource("1_wwiqq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bottom"]
+position = Vector2(-6, 1.90735e-06)
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_o6tse")
+
+[node name="TopLeft" type="Node2D" parent="."]
+position = Vector2(-1535, -1662)
+
+[node name="BottomRight" type="Node2D" parent="."]
+position = Vector2(4434, 2306)

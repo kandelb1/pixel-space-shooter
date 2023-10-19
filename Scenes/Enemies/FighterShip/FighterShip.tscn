@@ -231,7 +231,7 @@ radius = 450.0
 
 [node name="FighterShip" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 21
 inertia = 10.0
 center_of_mass_mode = 1
 linear_damp = 0.75
