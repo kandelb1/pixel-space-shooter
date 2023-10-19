@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca5yhsn4sljvx"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Minimap/Minimap.cs" id="1_fkwlr"]
+
+[node name="Minimap" type="ColorRect"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -74.0
+offset_bottom = 40.0
+grow_horizontal = 0
+color = Color(0.364706, 0.364706, 0.364706, 0.270588)
+script = ExtResource("1_fkwlr")

@@ -229,7 +229,7 @@ size = Vector2(27, 24)
 resource_local_to_scene = true
 radius = 450.0
 
-[node name="FighterShip" type="RigidBody2D"]
+[node name="FighterShip" type="RigidBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 21
 inertia = 10.0

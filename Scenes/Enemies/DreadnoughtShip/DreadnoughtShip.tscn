@@ -741,7 +741,7 @@ height = 100.0
 resource_local_to_scene = true
 radius = 425.0
 
-[node name="DreadnoughtShip" type="RigidBody2D"]
+[node name="DreadnoughtShip" type="RigidBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 21
 center_of_mass_mode = 1

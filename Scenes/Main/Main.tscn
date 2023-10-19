@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=36 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
@@ -6,11 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
 [ext_resource type="PackedScene" uid="uid://bcu5elxn4xkd4" path="res://Scenes/UI/PlayerShieldBar/PlayerShieldBar.tscn" id="6_bydsq"]
 [ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
+[ext_resource type="PackedScene" uid="uid://ca5yhsn4sljvx" path="res://Scenes/UI/Minimap/Minimap.tscn" id="7_b27r7"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
 [ext_resource type="PackedScene" uid="uid://c7ci7eikcgo37" path="res://Scenes/Enemies/FrigateShip/FrigateShip.tscn" id="9_1cyte"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
 [ext_resource type="PackedScene" uid="uid://bayfh17skg8ad" path="res://Scenes/WorldBoundary/WorldBoundary.tscn" id="11_m5r3d"]
+[ext_resource type="PackedScene" uid="uid://civ46vgnbtg2v" path="res://Scenes/Enemies/FighterShip/FighterShip.tscn" id="13_jxa2d"]
+[ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="14_q2hma"]
+[ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="15_6omwq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -184,6 +188,13 @@ playerShip = NodePath("../../../Ship")
 [node name="WeaponSelectUI" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("5_nj484")]
 playerShip = NodePath("../../Ship")
 
+[node name="Minimap" parent="ScreenUI" node_paths=PackedStringArray("worldBoundary") instance=ExtResource("7_b27r7")]
+offset_left = -115.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 58.0
+worldBoundary = NodePath("../../WorldBoundary")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Void" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -212,14 +223,17 @@ sprite_frames = SubResource("SpriteFrames_t1ctn")
 autoplay = "default"
 centered = false
 
-[node name="FrigateShip" parent="." instance=ExtResource("9_1cyte")]
-position = Vector2(-1355, -815)
-
-[node name="FrigateShip2" parent="." instance=ExtResource("9_1cyte")]
-position = Vector2(320, 1731)
-
-[node name="FrigateShip3" parent="." instance=ExtResource("9_1cyte")]
-position = Vector2(2880, 214)
-
 [node name="WorldBoundary" parent="." instance=ExtResource("11_m5r3d")]
 position = Vector2(-1027, -128)
+
+[node name="FrigateShip" parent="." instance=ExtResource("9_1cyte")]
+position = Vector2(-155, 217)
+
+[node name="FighterShip" parent="." instance=ExtResource("13_jxa2d")]
+position = Vector2(1185, 1281)
+
+[node name="ScoutShip" parent="." instance=ExtResource("14_q2hma")]
+position = Vector2(1368, -992)
+
+[node name="TorpedoShip" parent="." instance=ExtResource("15_6omwq")]
+position = Vector2(-1896, 1536)
