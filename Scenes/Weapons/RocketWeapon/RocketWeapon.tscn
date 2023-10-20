@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cn0s4yv4osibw"]
+[gd_scene load_steps=15 format=3 uid="uid://cn0s4yv4osibw"]
 
 [ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_lcv1h"]
 [ext_resource type="Script" path="res://Scenes/Weapons/RocketWeapon/RocketWeapon.cs" id="2_u2nx2"]
 [ext_resource type="Texture2D" uid="uid://dpb7a0cu8ynvd" path="res://Assets/Player/rocket firing.png" id="3_6oo4n"]
+[ext_resource type="Texture2D" uid="uid://dsq7empulmfu3" path="res://Assets/UI/rockets-crosshair.png" id="3_dxeap"]
+[ext_resource type="PackedScene" uid="uid://vd7ao2do38rq" path="res://Scenes/UI/TargetLock/TargetLock.tscn" id="3_ygyk2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_37ld7"]
 atlas = ExtResource("3_6oo4n")
@@ -61,10 +63,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27a31"]
+size = Vector2(48, 48)
+
 [node name="RocketsWeapon" type="Node2D"]
 show_behind_parent = true
 script = ExtResource("2_u2nx2")
 rocketProjectileScene = ExtResource("2_lcv1h")
+targetLockScene = ExtResource("3_ygyk2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -97,3 +103,28 @@ sprite_frames = SubResource("SpriteFrames_piods")
 position = Vector2(14, 2)
 sprite_frames = SubResource("SpriteFrames_piods")
 frame_progress = 0.280543
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+top_level = true
+texture = ExtResource("3_dxeap")
+
+[node name="AmmoLabel" type="Label" parent="Crosshair"]
+offset_left = 18.0
+offset_top = 21.0
+offset_right = 58.0
+offset_bottom = 44.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "6/6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="Crosshair"]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crosshair/Area2D"]
+shape = SubResource("RectangleShape2D_27a31")
+
+[node name="Targets" type="Node" parent="."]

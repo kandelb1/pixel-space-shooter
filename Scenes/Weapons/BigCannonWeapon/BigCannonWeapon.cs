@@ -8,6 +8,11 @@ public partial class BigCannonWeapon : BaseWeapon
     
     private AnimatedSprite2D animSprite;
     private Vector2 firePoint;
+    
+    private int currentAmmo = 3;
+
+    private Sprite2D crosshair;
+    private Label ammoLabel;
 
     public override void _Ready()
     {
@@ -15,15 +20,24 @@ public partial class BigCannonWeapon : BaseWeapon
         animSprite.FrameChanged += HandleFrameChanged;
         animSprite.AnimationFinished += HandleAnimationFinished;
         firePoint = GetNode<Node2D>("FirePoint").Position;
+        crosshair = GetNode<Sprite2D>("Crosshair");
+        ammoLabel = GetNode<Label>("Crosshair/AmmoLabel");
     }
 
     public override void _Input(InputEvent @event)
     {
         if (!IsEquipped()) return;
-        if (@event.IsActionPressed("left_click"))
+        if (@event.IsActionPressed("left_click") && currentAmmo > 0)
         {
             animSprite.Play();    
         }
+    }
+    
+    public override void _Process(double delta)
+    {
+        if (!IsEquipped()) return;
+        crosshair.Position = GetGlobalMousePosition();
+        ammoLabel.Text = currentAmmo.ToString();
     }
 
     private void HandleFrameChanged()
@@ -35,9 +49,9 @@ public partial class BigCannonWeapon : BaseWeapon
             bullet.SetStartPosition(ToGlobal(firePoint));
             bullet.SetStartRotation(ship.Rotation);
             GetNode("/root").AddChild(bullet); // TODO: find a better way to add bullets to the scene tree
-            
             // add recoil
             ship.ApplyImpulse(new Vector2(0, 1).Rotated(ship.Rotation) * 250f);
+            currentAmmo--;
         }
     }
 

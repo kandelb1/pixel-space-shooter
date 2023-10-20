@@ -4,7 +4,7 @@ using System;
 public abstract partial class BaseWeapon : Node2D
 {
     protected bool equipped;
-    
+
     public bool IsEquipped() => equipped;
 
     public void SetEquipped(bool equipped)

@@ -48,6 +48,8 @@ public partial class GameManager : Node
         scaryWaveTimer.Timeout += SpawnScaryWave;
         rng = new RandomNumberGenerator();
         CallDeferred(MethodName.SpawnInitialEnemies); // needs to be deferred because WorldBoundary hasn't set its boundaries yet
+
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
     }
 
     private void HandleEnemyDestroyed(Node2D enemy)

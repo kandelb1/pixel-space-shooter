@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdeqgtonx7o8q"]
+[gd_scene load_steps=18 format=3 uid="uid://cdeqgtonx7o8q"]
 
 [ext_resource type="Script" path="res://Scenes/Weapons/BigCannonWeapon/BigCannonWeapon.cs" id="1_shmle"]
 [ext_resource type="PackedScene" uid="uid://bdt28deprqty0" path="res://Scenes/Projectiles/BigCannonProjectile/BigCannonProjectile.tscn" id="2_8i0ta"]
 [ext_resource type="Texture2D" uid="uid://ce5lqwhula0yy" path="res://Assets/Player/Main Ship - Weapons - Big Space Gun.png" id="2_yrped"]
+[ext_resource type="Texture2D" uid="uid://dvnlaqokbsypp" path="res://Assets/UI/big-cannon-crosshair.png" id="3_0y1ew"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6kmo0"]
 atlas = ExtResource("2_yrped")
@@ -105,3 +106,18 @@ sprite_frames = SubResource("SpriteFrames_1b2eu")
 
 [node name="FirePoint" type="Node2D" parent="."]
 position = Vector2(0, -22)
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+top_level = true
+texture = ExtResource("3_0y1ew")
+
+[node name="AmmoLabel" type="Label" parent="Crosshair"]
+offset_left = -3.0
+offset_top = 5.0
+offset_right = 37.0
+offset_bottom = 28.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
