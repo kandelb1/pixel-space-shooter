@@ -3,6 +3,12 @@ using Godot.Collections;
 
 public partial class GameManager : Node
 {
+    public static GameManager Instance { get; private set; }
+
+    [Signal]
+    public delegate void ScoreUpdatedEventHandler();
+    
+    // TODO: move spawning stuff to a SpawnManager
     [Export] private PackedScene scoutShipScene;
     [Export] private PackedScene torpedoShipScene;
     [Export] private PackedScene dreadnoughtShipScene;
@@ -13,6 +19,8 @@ public partial class GameManager : Node
     [Export] private Node2D playerShip;
 
     private const float MIN_SPAWN_DISTANCE = 100f;
+    
+    public int Score { get; private set; }
 
     private Timer scoutWaveTimer;
     private Timer torpedoWaveTimer;
@@ -22,6 +30,16 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
+        if (Instance != null)
+        {
+            GD.PrintErr("There is already an instance of GameManager");
+            QueueFree();
+            return;
+        }
+        Instance = this;
+
+        GameEventBus.Instance.EnemyDestroyed += HandleEnemyDestroyed;
+        
         scoutWaveTimer = GetNode<Timer>("ScoutWaveTimer");
         scoutWaveTimer.Timeout += SpawnScoutWave;
         torpedoWaveTimer = GetNode<Timer>("TorpedoWaveTimer");
@@ -30,6 +48,14 @@ public partial class GameManager : Node
         scaryWaveTimer.Timeout += SpawnScaryWave;
         rng = new RandomNumberGenerator();
         CallDeferred(MethodName.SpawnInitialEnemies); // needs to be deferred because WorldBoundary hasn't set its boundaries yet
+    }
+
+    private void HandleEnemyDestroyed(Node2D enemy)
+    {
+        ScoreComponent scoreComponent = enemy.GetNodeOrNull<ScoreComponent>("ScoreComponent");
+        if (scoreComponent == null) return;
+        Score += scoreComponent.ScoreValue;
+        EmitSignal(SignalName.ScoreUpdated);
     }
 
     private void SpawnInitialEnemies()

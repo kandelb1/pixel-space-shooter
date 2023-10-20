@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c7ci7eikcgo37"]
+[gd_scene load_steps=45 format=3 uid="uid://c7ci7eikcgo37"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/FrigateShip/FrigateShip.cs" id="1_ln045"]
 [ext_resource type="Texture2D" uid="uid://doi2edt0i3wvg" path="res://Assets/Frigate/Kla'ed - Frigate - Base.png" id="1_sevgc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="6_5l5xf"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="7_lfgvd"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="8_5gh4s"]
+[ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="11_lyymf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8oho"]
 size = Vector2(37, 40)
@@ -310,5 +311,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_m7dt6")
+
+[node name="ScoreComponent" parent="." instance=ExtResource("11_lyymf")]
+ScoreValue = 4
 
 [editable path="SightRadiusComponent"]

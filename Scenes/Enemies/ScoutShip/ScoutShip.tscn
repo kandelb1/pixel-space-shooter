@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://53gu546aj7xl"]
+[gd_scene load_steps=44 format=3 uid="uid://53gu546aj7xl"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/ScoutShip/ScoutShip.cs" id="1_i4yjb"]
 [ext_resource type="PackedScene" uid="uid://elaosbwkplr8" path="res://Scenes/Projectiles/BasicBullet/BasicBullet.tscn" id="2_qkigq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="8_ovh4o"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="9_g7rm6"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="10_ecupx"]
+[ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="11_wmn4e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_010r4"]
 radius = 13.0384
@@ -292,5 +293,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_woehh")
+
+[node name="ScoreComponent" parent="." instance=ExtResource("11_wmn4e")]
+ScoreValue = 1
 
 [editable path="SightRadiusComponent"]

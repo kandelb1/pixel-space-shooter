@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://b1ajklrt8fu6s"]
+[gd_scene load_steps=120 format=3 uid="uid://b1ajklrt8fu6s"]
 
 [ext_resource type="Texture2D" uid="uid://bjtmqk3gikont" path="res://Assets/Dreadnought/Kla'ed - Dreadnought - Destruction.png" id="1_12vqg"]
 [ext_resource type="Script" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.cs" id="1_g0rjm"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="8_yhked"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="9_av8va"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="15_iqa2v"]
+[ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="16_tedwc"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_c5gru"]
 frames = 4
@@ -820,5 +821,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_a67lw")
+
+[node name="ScoreComponent" parent="." instance=ExtResource("16_tedwc")]
+ScoreValue = 8
 
 [editable path="SightRadiusComponent"]

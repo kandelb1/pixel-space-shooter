@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bjp45cju3gbwf"]
+[gd_scene load_steps=74 format=3 uid="uid://bjp45cju3gbwf"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.cs" id="1_d0cgd"]
 [ext_resource type="Texture2D" uid="uid://c2ci6jbibtwij" path="res://Assets/Battlecruiser/Kla'ed - Battlecruiser - Base.png" id="1_hl1xq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="6_bmsef"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="7_k77tc"]
 [ext_resource type="PackedScene" uid="uid://bv12hew8xt488" path="res://Scenes/Components/SightRadiusComponent/SightRadiusComponent.tscn" id="8_oivvm"]
+[ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="11_5sh5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmsq2"]
 size = Vector2(77, 90)
@@ -514,5 +515,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" parent="SightRadiusComponent" index="0"]
 shape = SubResource("CircleShape2D_7prwm")
+
+[node name="ScoreComponent" parent="." instance=ExtResource("11_5sh5w")]
+ScoreValue = 10
 
 [editable path="SightRadiusComponent"]

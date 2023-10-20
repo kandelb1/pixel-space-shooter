@@ -97,6 +97,7 @@ public partial class FighterShip : RigidBody2D
         uiNode.Hide();
         ship.Play("explode");
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
+        GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
         QueueFree();
     }
 }

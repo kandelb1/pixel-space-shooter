@@ -8,6 +8,9 @@ public partial class GameEventBus : Node
     [Signal]
     public delegate void HomePlanetDestroyedEventHandler();
 
+    [Signal]
+    public delegate void EnemyDestroyedEventHandler(Node2D enemy);
+    
     public override void _Ready()
     {
         if (Instance != null)

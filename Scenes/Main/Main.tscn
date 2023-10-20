@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=34 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://bntc15nh14mct" path="res://Scenes/GameManager/GameManager.tscn" id="1_x6ggp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
+[ext_resource type="PackedScene" uid="uid://cvfead8bmsixr" path="res://Scenes/UI/PlayerScore/PlayerScore.tscn" id="9_yrq5n"]
 [ext_resource type="PackedScene" uid="uid://bayfh17skg8ad" path="res://Scenes/WorldBoundary/WorldBoundary.tscn" id="11_m5r3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
@@ -198,6 +199,8 @@ offset_top = 3.0
 offset_right = -3.0
 offset_bottom = 58.0
 worldBoundary = NodePath("../../WorldBoundary")
+
+[node name="PlayerScore" parent="ScreenUI" instance=ExtResource("9_yrq5n")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

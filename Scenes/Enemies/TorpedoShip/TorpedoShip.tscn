@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bdwjvdc6xcnh0"]
+[gd_scene load_steps=70 format=3 uid="uid://bdwjvdc6xcnh0"]
 
 [ext_resource type="Texture2D" uid="uid://cjjxgmdwauvya" path="res://Assets/TorpedoShip/Kla'ed - Torpedo Ship - Destruction.png" id="1_4x8sy"]
 [ext_resource type="Script" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.cs" id="1_u5srn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://spanqdnhiv3m" path="res://Assets/TorpedoShip/Kla'ed - Torpedo Ship - Shield.png" id="8_lasxd"]
 [ext_resource type="PackedScene" uid="uid://bca3bh0ow107t" path="res://Scenes/UI/FloatingHealthBar/FloatingHealthBar.tscn" id="8_rlk65"]
 [ext_resource type="PackedScene" uid="uid://cr48uy7s0vfdc" path="res://Scenes/Components/ShieldComponent/ShieldComponent.tscn" id="9_3faw3"]
+[ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="14_8bir8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx2fg"]
 size = Vector2(60, 24)
@@ -485,5 +486,8 @@ offset_bottom = -13.0
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../UI")
 update_rotation = false
+
+[node name="ScoreComponent" parent="." instance=ExtResource("14_8bir8")]
+ScoreValue = 2
 
 [editable path="SightRadiusComponent"]

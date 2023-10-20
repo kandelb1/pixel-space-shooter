@@ -116,6 +116,7 @@ public partial class DreadnoughtShip : RigidBody2D
         uiNode.Hide();
         ship.Play("explode");
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
+        GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
         QueueFree();
     }
 
