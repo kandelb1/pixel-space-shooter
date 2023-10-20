@@ -10,6 +10,9 @@ public partial class GameManager : Node
     
     [Export] private WorldBoundary worldBoundary;
     [Export] private Node enemiesNode;
+    [Export] private Node2D playerShip;
+
+    private const float MIN_SPAWN_DISTANCE = 100f;
 
     private Timer scoutWaveTimer;
     private Timer torpedoWaveTimer;
@@ -61,7 +64,7 @@ public partial class GameManager : Node
 
     private void SpawnScaryWave()
     {
-        // spawn 2 dreadnoughts and 2 battlecruisers
+        // spawn 2 dreadnoughts and 2 battlecruisers       
         for (int i = 0; i < 2; i++)
         {
             RigidBody2D dreadnought = dreadnoughtShipScene.Instantiate<RigidBody2D>();
@@ -75,8 +78,14 @@ public partial class GameManager : Node
 
     private Vector2 GetRandomPosition()
     {
-        float x = rng.RandfRange(worldBoundary.TopLeft.X, worldBoundary.BottomRight.X);
-        float y = rng.RandfRange(worldBoundary.TopLeft.Y, worldBoundary.BottomRight.Y);
-        return new Vector2(x, y);
+        Vector2 position = new Vector2(
+            rng.RandfRange(worldBoundary.TopLeft.X, worldBoundary.BottomRight.X),
+            rng.RandfRange(worldBoundary.TopLeft.Y, worldBoundary.BottomRight.Y)
+        );
+        if (position.DistanceTo(playerShip.Position) <= MIN_SPAWN_DISTANCE)
+        {
+            return GetRandomPosition(); // pick a new position
+        }
+        return position;
     }
 }

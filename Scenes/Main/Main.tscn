@@ -157,9 +157,10 @@ animations = [{
 
 [node name="Main" type="Node"]
 
-[node name="GameManager" parent="." node_paths=PackedStringArray("worldBoundary", "enemiesNode") instance=ExtResource("1_x6ggp")]
+[node name="GameManager" parent="." node_paths=PackedStringArray("worldBoundary", "enemiesNode", "playerShip") instance=ExtResource("1_x6ggp")]
 worldBoundary = NodePath("../WorldBoundary")
 enemiesNode = NodePath("../Enemies")
+playerShip = NodePath("../Ship")
 
 [node name="Enemies" type="Node" parent="."]
 

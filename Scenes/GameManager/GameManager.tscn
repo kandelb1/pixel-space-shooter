@@ -1,16 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bntc15nh14mct"]
+[gd_scene load_steps=6 format=3 uid="uid://bntc15nh14mct"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager/GameManager.cs" id="1_y4veq"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_74bl0"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="3_vtncf"]
-[ext_resource type="PackedScene" uid="uid://civ46vgnbtg2v" path="res://Scenes/Enemies/FighterShip/FighterShip.tscn" id="4_58pmh"]
-[ext_resource type="PackedScene" uid="uid://c7ci7eikcgo37" path="res://Scenes/Enemies/FrigateShip/FrigateShip.tscn" id="5_7m5mp"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_41hej"]
 [ext_resource type="PackedScene" uid="uid://bjp45cju3gbwf" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.tscn" id="7_d2k8q"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_y4veq")
-spawnableEnemies = [ExtResource("2_74bl0"), ExtResource("3_vtncf"), ExtResource("4_58pmh"), ExtResource("5_7m5mp"), ExtResource("6_41hej"), ExtResource("7_d2k8q")]
 scoutShipScene = ExtResource("2_74bl0")
 torpedoShipScene = ExtResource("3_vtncf")
 dreadnoughtShipScene = ExtResource("6_41hej")
@@ -25,5 +22,5 @@ wait_time = 20.0
 autostart = true
 
 [node name="ScaryWaveTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 60.0
 autostart = true
