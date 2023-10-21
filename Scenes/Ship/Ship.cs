@@ -228,4 +228,13 @@ public partial class Ship : RigidBody2D
     }
 
     public BaseWeapon GetEquippedWeapon() => equippedWeapon;
+
+    public T GetWeapon<T>() where T : BaseWeapon
+    {
+        foreach (BaseWeapon weapon in weapons)
+        {
+            if (weapon is T weaponType) return weaponType;
+        }
+        return null;
+    }
 }

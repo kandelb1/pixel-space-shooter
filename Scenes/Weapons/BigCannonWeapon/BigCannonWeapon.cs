@@ -61,4 +61,6 @@ public partial class BigCannonWeapon : BaseWeapon
     }
 
     public override Texture2D GetWeaponImage() => animSprite.SpriteFrames.GetFrameTexture("default", 0);
+
+    public void AddAmmo(int amount) => currentAmmo += amount;
 }

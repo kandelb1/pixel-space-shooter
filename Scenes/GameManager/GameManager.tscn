@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bntc15nh14mct"]
+[gd_scene load_steps=9 format=3 uid="uid://bntc15nh14mct"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager/GameManager.cs" id="1_y4veq"]
 [ext_resource type="PackedScene" uid="uid://53gu546aj7xl" path="res://Scenes/Enemies/ScoutShip/ScoutShip.tscn" id="2_74bl0"]
 [ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="3_vtncf"]
 [ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="6_41hej"]
+[ext_resource type="PackedScene" uid="uid://ctouot4bj7alx" path="res://Scenes/Pickups/RocketPickup/RocketPickup.tscn" id="6_b25cv"]
+[ext_resource type="PackedScene" uid="uid://cim10n5ovh7i2" path="res://Scenes/Pickups/AutoCannonPickup/AutoCannonPickup.tscn" id="6_jlx13"]
+[ext_resource type="PackedScene" uid="uid://b6ykvb1g4n6bl" path="res://Scenes/Pickups/BigCannonPickup/BigCannonPickup.tscn" id="6_ngvtx"]
 [ext_resource type="PackedScene" uid="uid://bjp45cju3gbwf" path="res://Scenes/Enemies/BattlecruiserShip/BattlescruiserShip.tscn" id="7_d2k8q"]
 
 [node name="GameManager" type="Node"]
@@ -12,6 +15,7 @@ scoutShipScene = ExtResource("2_74bl0")
 torpedoShipScene = ExtResource("3_vtncf")
 dreadnoughtShipScene = ExtResource("6_41hej")
 battlecruiserShipScene = ExtResource("7_d2k8q")
+pickupScenes = Array[PackedScene]([ExtResource("6_jlx13"), ExtResource("6_ngvtx"), ExtResource("6_b25cv")])
 
 [node name="ScoutWaveTimer" type="Timer" parent="."]
 wait_time = 15.0

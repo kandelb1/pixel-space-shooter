@@ -6,6 +6,8 @@ public partial class AutoCannonWeapon : BaseWeapon
     [Export] private PackedScene autoCannonProjectile; // TODO: be consistent with PackedScene naming: add 'scene' to the end
     [Export] private RigidBody2D ship;
     // [Export] private Texture2D crosshair;
+
+    private const float MAX_ANIMATION_SPEED = 7f; // seems like good stopping point
     
     private AnimatedSprite2D animSprite;
     private Vector2 firePointLeft;
@@ -42,5 +44,9 @@ public partial class AutoCannonWeapon : BaseWeapon
 
     public override Texture2D GetWeaponImage() => animSprite.SpriteFrames.GetFrameTexture("default", 0);
 
-    // public override Texture2D GetCrosshairImage() => crosshair;
+    public void IncreaseFiringSpeed(float percentage)
+    {
+        float newSpeed = animSprite.SpeedScale += percentage;
+        animSprite.SpeedScale = Mathf.Min(newSpeed, MAX_ANIMATION_SPEED);
+    }
 }

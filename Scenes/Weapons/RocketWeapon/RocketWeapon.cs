@@ -156,4 +156,15 @@ public partial class RocketWeapon : BaseWeapon
             child.QueueFree();
         }
     }
+
+    public void RefillAmmo()
+    {
+        foreach (AnimatedSprite2D sprite in rockets)
+        {
+            sprite.Stop();
+            sprite.Frame = 0; // TODO: check if this is necessary. I think Stop() resets the frame to 0
+        }
+        fireIndex = 0;
+        currentAmmo = 6;
+    }
 }

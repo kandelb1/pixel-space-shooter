@@ -18,6 +18,8 @@ public partial class GameManager : Node
     [Export] private Node enemiesNode;
     [Export] private Node2D playerShip;
 
+    [Export] private Array<PackedScene> pickupScenes;
+
     private const float MIN_SPAWN_DISTANCE = 100f;
     
     public int Score { get; private set; }
@@ -58,6 +60,19 @@ public partial class GameManager : Node
         if (scoreComponent == null) return;
         Score += scoreComponent.ScoreValue;
         EmitSignal(SignalName.ScoreUpdated);
+        
+        RollLoot(enemy.Position);
+    }
+
+    private void RollLoot(Vector2 position)
+    {
+        // basic loot system that has a 30% chance of spawning a random pickup
+        float roll = rng.Randf();
+        if (roll > 0.3f) return;
+        
+        Node2D pickup = pickupScenes.PickRandom().Instantiate<Node2D>();
+        pickup.Position = position;
+        GetNode("/root").AddChild(pickup);
     }
 
     private void SpawnInitialEnemies()
