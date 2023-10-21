@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rgajjjpim850" path="res://Scenes/Components/ScoreComponent/ScoreComponent.tscn" id="11_5sh5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmsq2"]
-size = Vector2(77, 90)
+size = Vector2(15, 85)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4afx2"]
 atlas = ExtResource("1_hl1xq")
@@ -456,23 +456,22 @@ script = ExtResource("1_d0cgd")
 shipToDeployScene = ExtResource("2_8q2ui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.5, -8)
+position = Vector2(0.5, -5.5)
 shape = SubResource("RectangleShape2D_kmsq2")
 
 [node name="ShipDeployPoints" type="Node2D" parent="."]
 
 [node name="1" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(40, -7)
+position = Vector2(27, -7)
 
 [node name="2" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(14, -30)
+position = Vector2(27, -30)
 
 [node name="3" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(-39, -8)
+position = Vector2(-27, -7)
 
 [node name="4" type="Node2D" parent="ShipDeployPoints"]
-position = Vector2(-12, -31)
+position = Vector2(-27, -30)
 
 [node name="Ship" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ifw06")
@@ -481,8 +480,9 @@ autoplay = "default"
 frame = 22
 
 [node name="Engine" type="AnimatedSprite2D" parent="Ship"]
-top_level = true
+show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_v4uoi")
+autoplay = "default"
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_qlaqp")]
 maxHealth = 12
