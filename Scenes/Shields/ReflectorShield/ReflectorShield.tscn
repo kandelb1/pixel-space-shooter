@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://wvjw2ixko7fp"]
+
+[ext_resource type="Texture2D" uid="uid://dngfavtfgb357" path="res://Assets/Player/Main Ship - Shields - Front Shield.png" id="1_vqrdm"]
+[ext_resource type="Script" path="res://Scenes/Shields/ReflectorShield/ReflectorShield.cs" id="2_7hwj2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lh1x"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4nw2"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5crsk"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0w08"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hspdq"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v67ql"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2suub"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw7nr"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3p5l"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ono2"]
+atlas = ExtResource("1_vqrdm")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f548m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lh1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4nw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5crsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0w08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hspdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v67ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2suub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw7nr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3p5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ono2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4fkb"]
+size = Vector2(34, 7)
+
+[node name="ReflectorShield" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_f548m")
+autoplay = "default"
+frame_progress = 0.393759
+script = ExtResource("2_7hwj2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_g4fkb")
