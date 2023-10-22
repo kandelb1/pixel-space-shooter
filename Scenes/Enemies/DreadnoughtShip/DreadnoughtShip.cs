@@ -79,6 +79,7 @@ public partial class DreadnoughtShip : RigidBody2D
     {
         Vector2 targetPos = player.Position;
         LookFollow(state, targetPos);
+        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 10f;
     }
 
     public override void _Process(double delta)
@@ -114,6 +115,7 @@ public partial class DreadnoughtShip : RigidBody2D
         engine.Hide();
         shield.Hide();
         uiNode.Hide();
+        GetNode<CollisionShape2D>("HurtboxComponent/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         ship.Play("explode");
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);

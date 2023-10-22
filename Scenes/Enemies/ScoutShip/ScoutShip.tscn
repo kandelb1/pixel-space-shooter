@@ -263,7 +263,6 @@ sprite_frames = SubResource("SpriteFrames_nc134")
 autoplay = "default"
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("7_tn665")]
-visible = false
 collision_layer = 4
 collision_mask = 2
 

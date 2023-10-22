@@ -115,6 +115,7 @@ public partial class BattlescruiserShip : RigidBody2D
         dead = true;
         engine.Hide();
         uiNode.Hide();
+        GetNode<CollisionShape2D>("HurtboxComponent/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         ship.Play("explode");
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
