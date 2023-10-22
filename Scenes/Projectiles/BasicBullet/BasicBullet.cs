@@ -1,10 +1,13 @@
 using Godot;
 using System;
 
-public partial class BasicBullet : RigidBody2D
+public partial class BasicBullet : Node2D
 {
-    public float startRotation;
-    public Vector2 startPosition;
+    private const float VELOCITY = 350f;
+    
+    private VelocityComponent velocityComponent;
+    private float startRotation;
+    private Vector2 startPosition;
 
     public void SetStartRotation(float rotation) => startRotation = rotation;
 
@@ -14,6 +17,18 @@ public partial class BasicBullet : RigidBody2D
     {
         Rotation = startRotation;
         Position = startPosition;
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 350f;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * VELOCITY);
+        velocityComponent.VelocityChanged += HandleVelocityChanged;
+    }
+
+    public override void _Process(double delta)
+    {
+        Position += velocityComponent.Velocity * (float) delta;
+    }
+
+    private void HandleVelocityChanged()
+    {
+        Rotation = velocityComponent.Velocity.Angle() + (Mathf.Pi / 2);
     }
 }

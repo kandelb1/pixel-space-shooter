@@ -4,9 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/Projectiles/AutoCannonProjectile/AutoCannonProjectile.cs" id="1_dh784"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_7mhi6"]
 [ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="3_8lso6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fenao"]
-size = Vector2(12, 18)
+[ext_resource type="PackedScene" uid="uid://c6h588qfpp1oe" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="5_sfdl8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_scbd3"]
 atlas = ExtResource("1_b620w")
@@ -47,15 +45,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k86l8"]
 size = Vector2(10, 16)
 
-[node name="AutoCannonProjectile" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
-center_of_mass_mode = 1
+[node name="AutoCannonProjectile" type="Node2D"]
 script = ExtResource("1_dh784")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_fenao")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mpkey")
@@ -72,3 +63,5 @@ shape = SubResource("RectangleShape2D_k86l8")
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_7mhi6")]
 lifetimeSeconds = 3.0
 nodeToDelete = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_sfdl8")]

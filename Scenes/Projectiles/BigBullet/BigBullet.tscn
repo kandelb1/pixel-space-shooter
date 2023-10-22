@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br48a014asxs3" path="res://Assets/Frigate/Kla'ed - Big Bullet.png" id="1_kvuch"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="2_7qbo6"]
 [ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="3_agap3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6fti"]
-size = Vector2(6, 12)
+[ext_resource type="PackedScene" uid="uid://c6h588qfpp1oe" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="5_rm7xn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1m48"]
 atlas = ExtResource("1_kvuch")
@@ -47,15 +45,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuxry"]
 size = Vector2(6, 12)
 
-[node name="BigBullet" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
+[node name="BigBullet" type="Node2D"]
 script = ExtResource("1_0thex")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_g6fti")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w2j6c")
@@ -65,6 +56,8 @@ frame_progress = 0.67078
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("2_7qbo6")]
 lifetimeSeconds = 5.0
 nodeToDelete = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_rm7xn")]
 
 [node name="ProjectileHitboxComponent" parent="." instance=ExtResource("3_agap3")]
 visible = false

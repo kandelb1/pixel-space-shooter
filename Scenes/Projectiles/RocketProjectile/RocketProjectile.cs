@@ -1,17 +1,20 @@
 using Godot;
 using System;
 
-public partial class RocketProjectile : RigidBody2D
+public partial class RocketProjectile : Node2D
 {
-    private Vector2 startPos;
+    private const float ACCELERATION = 500f;
+    
+    private VelocityComponent velocityComponent;
+    private Vector2 startPosition;
     private float startRotation;
     private Vector2 initialVelocity;
     
     private Node2D target;
 
-    public void SetPosition(Vector2 pos) => startPos = pos;
+    public void SetStartPosition(Vector2 pos) => startPosition = pos;
     
-    public void SetRotation(float rotation) => startRotation = rotation;
+    public void SetStartRotation(float rotation) => startRotation = rotation;
 
     public void SetInitialVelocity(Vector2 velocity) => initialVelocity = velocity;
 
@@ -19,34 +22,22 @@ public partial class RocketProjectile : RigidBody2D
 
     public override void _Ready()
     {
-        Position = startPos;
         Rotation = startRotation;
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * initialVelocity.Length();
+        Position = startPosition;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * initialVelocity.Length());
+        velocityComponent.SetAcceleration(new Vector2(0, -1).Rotated(Rotation) * ACCELERATION);
     }
-    
-    // TODO: duplicate code from player's Ship class
-    private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
+
+    public override void _Process(double delta)
     {
-        Vector2 dirToTarget = (targetPosition - Position).Normalized();
-        
-        float rotationAngle = Mathf.Atan2(dirToTarget.Y, dirToTarget.X) + (Mathf.Pi / 2) - Rotation;
-        
-        if (rotationAngle > Mathf.Pi)
+        if (target != null && IsInstanceValid(target))
         {
-            rotationAngle -= Mathf.Pi * 2;
+            // look at target
+            Vector2 dirToTarget = (target.Position - Position).Normalized();
+            Rotation = dirToTarget.Angle() + (Mathf.Pi / 2);
+            velocityComponent.SetAcceleration(new Vector2(0, -1).Rotated(Rotation) * ACCELERATION);
         }
-        else if (rotationAngle < -Mathf.Pi)
-        {
-            rotationAngle += Mathf.Pi * 2;
-        }
-
-        state.AngularVelocity = rotationAngle / state.Step;
-    }
-
-    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
-    { 
-        if (target != null && IsInstanceValid(target)) LookFollow(state, target.Position);
-        Vector2 forward = new Vector2(0, -1).Rotated(Rotation); // 0, -1 because the rocket is facing up when its rotation is at 0 degrees
-        ApplyForce(forward * 500f);
+        Position += velocityComponent.Velocity * (float) delta;
     }
 }

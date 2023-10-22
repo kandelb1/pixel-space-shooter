@@ -67,8 +67,8 @@ public partial class RocketWeapon : BaseWeapon
                 rockets[fireIndex].Play();
                 RocketProjectile rocket = rocketProjectileScene.Instantiate<RocketProjectile>();
                 Vector2 position = rockets[fireIndex].Position + new Vector2(0, -10);
-                rocket.SetPosition(ToGlobal(position));
-                rocket.SetRotation(ship.Rotation);
+                rocket.SetStartPosition(ToGlobal(position));
+                rocket.SetStartRotation(ship.Rotation);
                 rocket.SetTarget(target);
                 GetNode("/root").AddChild(rocket);
                 currentAmmo--;

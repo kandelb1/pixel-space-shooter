@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b4fws7dwkl005" path="res://Assets/TorpedoShip/Kla'ed - Torpedo.png" id="2_21rwi"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_tbxvh"]
 [ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="4_hlxig"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlqpo"]
-size = Vector2(6, 17)
+[ext_resource type="PackedScene" uid="uid://c6h588qfpp1oe" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="4_ujuyp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ec5qd"]
 atlas = ExtResource("2_21rwi")
@@ -40,15 +38,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chrs3"]
 size = Vector2(6, 16)
 
-[node name="TorpedoProjectile" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
+[node name="TorpedoProjectile" type="Node2D"]
 script = ExtResource("1_0vqsb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_nlqpo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_anmra")
@@ -59,6 +50,8 @@ offset = Vector2(0, 7)
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_tbxvh")]
 lifetimeSeconds = 5.0
 nodeToDelete = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("4_ujuyp")]
 
 [node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_hlxig")]
 collision_layer = 8

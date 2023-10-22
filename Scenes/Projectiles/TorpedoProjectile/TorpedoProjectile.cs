@@ -1,24 +1,36 @@
 using Godot;
 using System;
 
-public partial class TorpedoProjectile : RigidBody2D
+public partial class TorpedoProjectile : Node2D
 {
-    private Vector2 startPos;
-    private float startRotation;
-
-    public void SetPosition(Vector2 pos) => startPos = pos;
+    private const float ACCELERATION = 300f;
     
-    public void SetRotation(float rotation) => startRotation = rotation;
+    private VelocityComponent velocityComponent;
+    private float startRotation;
+    private Vector2 startPosition;
+
+    public void SetStartRotation(float rotation) => startRotation = rotation;
+
+    public void SetStartPosition(Vector2 pos) => startPosition = pos;
 
     public override void _Ready()
     {
-        Position = startPos;
         Rotation = startRotation;
+        Position = startPosition;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetAcceleration(new Vector2(0, -1).Rotated(Rotation) * ACCELERATION);
+        velocityComponent.VelocityChanged += HandleVelocityChanged;
+    }
+    
+    public override void _Process(double delta)
+    {
+        Position += velocityComponent.Velocity * (float) delta;
     }
 
-    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    private void HandleVelocityChanged()
     {
-        Vector2 forward = new Vector2(0, -1).Rotated(Rotation); // 0, -1 because the rocket is facing up when its rotation is at 0 degrees
-        ApplyForce(forward * 300f);
+        Rotation = velocityComponent.Velocity.Angle() + (Mathf.Pi / 2);
+        // make sure to change acceleration to match the new direction
+        velocityComponent.SetAcceleration(new Vector2(0, -1).Rotated(Rotation) * ACCELERATION);
     }
 }

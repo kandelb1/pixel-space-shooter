@@ -1,10 +1,13 @@
 using Godot;
 using System;
 
-public partial class AutoCannonProjectile : RigidBody2D
+public partial class AutoCannonProjectile : Node2D
 {
-    public float startRotation;
-    public Vector2 startPosition;
+    private const float VELOCITY = 400f;
+    
+    private VelocityComponent velocityComponent;
+    private float startRotation;
+    private Vector2 startPosition;
 
     public void SetStartRotation(float rotation) => startRotation = rotation;
 
@@ -14,6 +17,12 @@ public partial class AutoCannonProjectile : RigidBody2D
     {
         Rotation = startRotation;
         Position = startPosition;
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 400f;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * VELOCITY);
+    }
+
+    public override void _Process(double delta)
+    {
+        Position += velocityComponent.Velocity * (float) delta;
     }
 }

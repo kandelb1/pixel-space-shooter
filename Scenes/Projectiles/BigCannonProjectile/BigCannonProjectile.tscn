@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://04qbvyc1nqx0" path="res://Assets/Player/Main ship weapon - Projectile - Big Space Gun.png" id="1_iypdw"]
 [ext_resource type="PackedScene" uid="uid://h6ay0nvpptm0" path="res://Scenes/Projectiles/Explosion/Explosion.tscn" id="2_i6fsp"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="2_l5ptx"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ecrip"]
-radius = 8.0
+[ext_resource type="PackedScene" uid="uid://c6h588qfpp1oe" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="5_g6f3g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6ei4"]
 atlas = ExtResource("1_iypdw")
@@ -88,16 +86,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvu4n"]
 
-[node name="BigCannonProjectile" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
-center_of_mass_mode = 1
+[node name="BigCannonProjectile" type="Node2D"]
 script = ExtResource("1_3bvet")
 explosionScene = ExtResource("2_i6fsp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_ecrip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_63suy")
@@ -107,6 +98,8 @@ frame_progress = 0.510856
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("2_l5ptx")]
 lifetimeSeconds = 5.0
 nodeToDelete = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_g6f3g")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

@@ -101,8 +101,8 @@ public partial class TorpedoShip : RigidBody2D
         if (ship.Frame % 2 == 0)
         {
             TorpedoProjectile torpedo = torpedoScene.Instantiate<TorpedoProjectile>();
-            torpedo.SetPosition(ToGlobal(firePoints[firePointIndex]));
-            torpedo.SetRotation(Rotation);
+            torpedo.SetStartPosition(ToGlobal(firePoints[firePointIndex]));
+            torpedo.SetStartRotation(Rotation);
             GetNode("/root").AddChild(torpedo);
             firePointIndex++;
         }

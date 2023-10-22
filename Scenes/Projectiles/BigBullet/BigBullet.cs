@@ -1,18 +1,34 @@
 using Godot;
 using System;
 
-public partial class BigBullet : RigidBody2D
+public partial class BigBullet : Node2D
 {
-    private Vector2 startPos;
-    private float startRot;
-    public void SetStartPosition(Vector2 startPos) => this.startPos = startPos;
+    private const float VELOCITY = 300f;
+    
+    private VelocityComponent velocityComponent;
+    private float startRotation;
+    private Vector2 startPosition;
 
-    public void SetStartRotation(float rotation) => startRot = rotation;
+    public void SetStartRotation(float rotation) => startRotation = rotation;
+
+    public void SetStartPosition(Vector2 pos) => startPosition = pos;
 
     public override void _Ready()
     {
-        Position = startPos;
-        Rotation = startRot;
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 300f;
+        Rotation = startRotation;
+        Position = startPosition;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * VELOCITY);
+        velocityComponent.VelocityChanged += HandleVelocityChanged;
+    }
+    
+    public override void _Process(double delta)
+    {
+        Position += velocityComponent.Velocity * (float) delta;
+    }
+
+    private void HandleVelocityChanged()
+    {
+        Rotation = velocityComponent.Velocity.Angle() + (Mathf.Pi / 2);
     }
 }

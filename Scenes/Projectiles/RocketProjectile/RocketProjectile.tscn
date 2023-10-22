@@ -4,9 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.cs" id="1_lh3ly"]
 [ext_resource type="PackedScene" uid="uid://bmge47jt5jid7" path="res://Scenes/Components/LifetimeComponent/LifetimeComponent.tscn" id="3_on6sp"]
 [ext_resource type="PackedScene" uid="uid://c1h1qhqktuhh4" path="res://Scenes/Components/ProjectileHitboxComponent/ProjectileHitboxComponent.tscn" id="4_o8pon"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbpg6"]
-size = Vector2(5, 17)
+[ext_resource type="PackedScene" uid="uid://c6h588qfpp1oe" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="5_ho5ep"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcv1t"]
 atlas = ExtResource("1_j8b1w")
@@ -40,17 +38,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjpgl"]
 size = Vector2(7, 17)
 
-[node name="RocketProjectile" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
-inertia = 15.0
-center_of_mass_mode = 1
+[node name="RocketProjectile" type="Node2D"]
 script = ExtResource("1_lh3ly")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-0.5, 1.5)
-shape = SubResource("RectangleShape2D_lbpg6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gnkav")
@@ -60,6 +49,8 @@ frame_progress = 0.495374
 [node name="LifetimeComponent" parent="." node_paths=PackedStringArray("nodeToDelete") instance=ExtResource("3_on6sp")]
 lifetimeSeconds = 3.0
 nodeToDelete = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_ho5ep")]
 
 [node name="ProjectileHitboxComponent" parent="." instance=ExtResource("4_o8pon")]
 collision_layer = 2

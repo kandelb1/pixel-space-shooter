@@ -1,10 +1,13 @@
 using Godot;
 using System;
 
-public partial class BigCannonProjectile : RigidBody2D
+public partial class BigCannonProjectile : Node2D
 {
     [Export] private PackedScene explosionScene;
-    
+
+    private const float VELOCITY = 150f;
+
+    private VelocityComponent velocityComponent;
     private float startRotation;
     private Vector2 startPosition;
     private Area2D area;
@@ -17,14 +20,19 @@ public partial class BigCannonProjectile : RigidBody2D
     {
         Rotation = startRotation;
         Position = startPosition;
-        LinearVelocity = new Vector2(0, -1).Rotated(Rotation) * 150f;
+        velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * VELOCITY);
         area = GetNode<Area2D>("Area2D");
         area.AreaEntered += HandleAreaEntered;
     }
-
+    
+    public override void _Process(double delta)
+    {
+        Position += velocityComponent.Velocity * (float) delta;
+    }
+    
     private void HandleAreaEntered(Area2D other)
     {
-        GD.Print("Big projectile encountered something, spawning explosion");
         CallDeferred(MethodName.SpawnExplosion);
         QueueFree();
     }
