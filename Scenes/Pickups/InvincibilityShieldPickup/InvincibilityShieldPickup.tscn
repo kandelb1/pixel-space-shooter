@@ -1,0 +1,174 @@
+[gd_scene load_steps=23 format=3 uid="uid://dc6010q7mxi6n"]
+
+[ext_resource type="Script" path="res://Scenes/Pickups/InvincibilityShieldPickup/InvincibilityShieldPickup.cs" id="1_bmvmk"]
+[ext_resource type="Texture2D" uid="uid://c3j7vr8hophhk" path="res://Assets/Pickups/Pickup Icon - Shield Generator - Invincibility Shield.png" id="1_stfhu"]
+[ext_resource type="PackedScene" uid="uid://cd80xs0kk0i2y" path="res://Scenes/Shields/InvincibilityShield/InvincibilityShield.tscn" id="2_glpkv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx4cy"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx2nw"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p471g"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ontb0"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbyqh"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0io5"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ruip"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf468"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rboj5"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2u8r"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au8wp"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctr10"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l12j"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i00lh"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inpdr"]
+atlas = ExtResource("1_stfhu")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sd83c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx4cy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx2nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p471g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ontb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbyqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0io5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ruip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf468")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rboj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2u8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au8wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctr10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l12j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i00lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inpdr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1oexo"]
+radius = 30.0
+
+[sub_resource type="Animation" id="Animation_xgl0j"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1.1487, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r46y4"]
+_data = {
+"bob": SubResource("Animation_xgl0j")
+}
+
+[node name="InvincibilityShieldPickup" type="Node2D"]
+script = ExtResource("1_bmvmk")
+invincibilityShieldScene = ExtResource("2_glpkv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sd83c")
+autoplay = "default"
+
+[node name="Label" type="Label" parent="AnimatedSprite2D"]
+offset_left = 17.0
+offset_top = -7.0
+offset_right = 34.0
+offset_bottom = 10.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
+text = "10s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1oexo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "bob"
+libraries = {
+"": SubResource("AnimationLibrary_r46y4")
+}

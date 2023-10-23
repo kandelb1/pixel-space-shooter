@@ -15,11 +15,9 @@ public partial class ReflectorShield : AnimatedSprite2D
 
     public override void _Process(double delta)
     {
-        timeLeftSeconds -= (float) delta;
-        GD.Print($"Reflector Shield Time Left is now {timeLeftSeconds}");
+        timeLeftSeconds -= (float) delta;        
         if (timeLeftSeconds <= 0)
         {
-            GD.Print($"Reflector shield timed out");
             QueueFree();
         }
     }

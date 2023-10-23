@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://cd80xs0kk0i2y"]
+
+[ext_resource type="Texture2D" uid="uid://crw1mq7yvfh0n" path="res://Assets/Player/Main Ship - Shields - Invincibility Shield.png" id="1_ig5k1"]
+[ext_resource type="Script" path="res://Scenes/Shields/InvincibilityShield/InvincibilityShield.cs" id="2_x8kec"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7234"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4knd"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxlpu"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u5aa"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3jnh"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgy1v"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cxq3"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y50yj"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6tux"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltb31"]
+atlas = ExtResource("1_ig5k1")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r55if"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7234")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4knd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxlpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u5aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3jnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgy1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cxq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y50yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6tux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltb31")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="InvincibilityShield" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_r55if")
+autoplay = "default"
+frame_progress = 0.944227
+script = ExtResource("2_x8kec")

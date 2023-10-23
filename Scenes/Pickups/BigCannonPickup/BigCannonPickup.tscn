@@ -119,6 +119,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_asvao"]
 radius = 30.0
 
+[sub_resource type="Animation" id="Animation_tp1hd"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_lxa1c"]
 resource_name = "bob"
 loop_mode = 1
@@ -135,9 +138,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tp1hd"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h5vhr"]
 _data = {
 "RESET": SubResource("Animation_tp1hd"),
@@ -151,7 +151,7 @@ script = ExtResource("1_o3gua")
 position = Vector2(0, -2.80035)
 sprite_frames = SubResource("SpriteFrames_8l0q3")
 autoplay = "default"
-frame_progress = 0.30913
+frame_progress = 0.474622
 
 [node name="Label" type="Label" parent="AnimatedSprite2D"]
 offset_left = 11.0
