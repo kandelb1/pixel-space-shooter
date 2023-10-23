@@ -4,7 +4,7 @@ using System;
 public partial class ReflectorShieldPickup : LootPickup
 {
     [Export] private PackedScene reflectorShieldScene;
-
+    
     private const float SHIELD_TIME = 15f;
     
     public override void OnPickup(Ship playerShip)
@@ -15,6 +15,7 @@ public partial class ReflectorShieldPickup : LootPickup
         {
             ReflectorShield shield = reflectorShieldScene.Instantiate<ReflectorShield>();
             shield.IncreaseTimeLeft(SHIELD_TIME);
+            shield.SetPowerupIcon(GetNode<AnimatedSprite2D>("AnimatedSprite2D").SpriteFrames.GetFrameTexture("default", 0));
             // need to use CallDeferred because we can't add a child to player on the same frame as the collision with the pickup. idk, Godot stuff.
             CallDeferred(MethodName.AddShield, playerShip, shield);
         }

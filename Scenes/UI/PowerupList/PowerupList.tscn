@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://djel2eco6xtac"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PowerupList/PowerupList.cs" id="1_g47sa"]
+[ext_resource type="PackedScene" uid="uid://cwdsw0ruqtp2b" path="res://Scenes/UI/PowerupList/PowerupListItem.tscn" id="2_g8amt"]
+
+[node name="PowerupList" type="VBoxContainer"]
+script = ExtResource("1_g47sa")
+powerupListItemScene = ExtResource("2_g8amt")

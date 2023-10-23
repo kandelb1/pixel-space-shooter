@@ -1,16 +1,18 @@
 using Godot;
 using System;
 
-public partial class ReflectorShield : AnimatedSprite2D
+public partial class ReflectorShield : AnimatedSprite2D, IPowerup
 {
     private const int PLAYER_PROJECTILE_COLLISION_LAYER = 2;
     private const int ENEMY_COLLISION_LAYER = 4;
 
     private float timeLeftSeconds;
+    private Texture2D powerupIcon;
     
     public override void _Ready()
     {
         GetNode<Area2D>("Area2D").AreaEntered += HandleAreaEntered;
+        GameEventBus.Instance.PowerupAcquired?.Invoke(this);
     }
 
     public override void _Process(double delta)
@@ -39,4 +41,10 @@ public partial class ReflectorShield : AnimatedSprite2D
         hitbox.CollisionLayer = PLAYER_PROJECTILE_COLLISION_LAYER;
         hitbox.CollisionMask = ENEMY_COLLISION_LAYER;
     }
+
+    public void SetPowerupIcon(Texture2D icon) => powerupIcon = icon;
+
+    public Texture2D GetIcon() => powerupIcon;
+
+    public float GetTimeRemaining() => timeLeftSeconds;
 }

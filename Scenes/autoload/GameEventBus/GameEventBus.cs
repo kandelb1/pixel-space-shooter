@@ -11,6 +11,9 @@ public partial class GameEventBus : Node
     [Signal]
     public delegate void EnemyDestroyedEventHandler(Node2D enemy);
     
+    // we want this Action to be invokable outside of this class, so don't use the 'event' keyword 
+    public Action<IPowerup> PowerupAcquired;
+
     public override void _Ready()
     {
         if (Instance != null)
