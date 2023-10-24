@@ -1,14 +1,17 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class ReflectorShield : AnimatedSprite2D, IPowerup
 {
+    [Export] private string reflectSoundPath;
+
     private const int PLAYER_PROJECTILE_COLLISION_LAYER = 2;
     private const int ENEMY_COLLISION_LAYER = 4;
 
     private float timeLeftSeconds;
     private Texture2D powerupIcon;
-    
+
     public override void _Ready()
     {
         GetNode<Area2D>("Area2D").AreaEntered += HandleAreaEntered;
@@ -40,6 +43,8 @@ public partial class ReflectorShield : AnimatedSprite2D, IPowerup
         // convert it to a player projectile that can hit enemies
         hitbox.CollisionLayer = PLAYER_PROJECTILE_COLLISION_LAYER;
         hitbox.CollisionMask = ENEMY_COLLISION_LAYER;
+        
+        AudioManager.Instance.PlaySound(reflectSoundPath);
     }
 
     public void SetPowerupIcon(Texture2D icon) => powerupIcon = icon;

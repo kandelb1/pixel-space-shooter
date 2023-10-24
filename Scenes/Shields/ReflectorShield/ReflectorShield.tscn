@@ -89,6 +89,7 @@ sprite_frames = SubResource("SpriteFrames_f548m")
 autoplay = "default"
 frame_progress = 0.393759
 script = ExtResource("2_7hwj2")
+reflectSoundPath = "res://Assets/Sounds/projectile-reflect-2.wav"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
