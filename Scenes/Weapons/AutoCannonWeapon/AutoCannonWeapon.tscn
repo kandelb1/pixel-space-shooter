@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://chbw4gqgh52cm"]
+[gd_scene load_steps=14 format=3 uid="uid://chbw4gqgh52cm"]
 
 [ext_resource type="Script" path="res://Scenes/Weapons/AutoCannonWeapon/AutoCannonWeapon.cs" id="1_g2c3w"]
 [ext_resource type="Texture2D" uid="uid://bnlcwmkjc4u43" path="res://Assets/Player/Main Ship - Weapons - Auto Cannon.png" id="2_1fckc"]
 [ext_resource type="PackedScene" uid="uid://duo44g5se5g60" path="res://Scenes/Projectiles/AutoCannonProjectile/AutoCannonProjectile.tscn" id="2_eft66"]
 [ext_resource type="Texture2D" uid="uid://bfr5ioblmxlgx" path="res://Assets/UI/auto-cannon-crosshair.png" id="3_2avko"]
+[ext_resource type="AudioStream" uid="uid://s48yf7r2ik1j" path="res://Assets/Sounds/Bullet_1.wav" id="3_fkchs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bfvc4"]
 atlas = ExtResource("2_1fckc")
@@ -65,6 +66,7 @@ animations = [{
 [node name="AutoCannonWeapon" type="Node2D"]
 script = ExtResource("1_g2c3w")
 autoCannonProjectile = ExtResource("2_eft66")
+shootSound = ExtResource("3_fkchs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0kjad")
@@ -79,3 +81,5 @@ position = Vector2(9, -18)
 [node name="Crosshair" type="Sprite2D" parent="."]
 top_level = true
 texture = ExtResource("3_2avko")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

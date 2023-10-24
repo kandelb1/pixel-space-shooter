@@ -4,6 +4,7 @@ using System;
 public partial class InvincibilityShieldPickup : LootPickup
 {
     [Export] private PackedScene invincibilityShieldScene;
+    [Export] private string soundEffectPath;
 
     private const float SHIELD_TIME = 10f;
     
@@ -23,6 +24,8 @@ public partial class InvincibilityShieldPickup : LootPickup
         {
             existingShield.IncreaseTimeLeft(SHIELD_TIME);    
         }
+        // having issues with an [Export] AudioStream, so I'm passing paths around
+        AudioManager.Instance.PlaySound(soundEffectPath);
     }
 
     private void AddShield(Ship playerShip, InvincibilityShield shield)

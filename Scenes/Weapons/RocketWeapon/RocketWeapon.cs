@@ -9,6 +9,7 @@ public partial class RocketWeapon : BaseWeapon
     [Export] private PackedScene rocketProjectileScene;
     [Export] private RigidBody2D ship;
     [Export] private PackedScene targetLockScene;
+    [Export] private AudioStream shootSound;
     
     private Timer timer;
 
@@ -26,6 +27,8 @@ public partial class RocketWeapon : BaseWeapon
     private List<Node2D> targets;
     private int maxTargets;
     private Area2D targetDetector;
+    
+    private AudioStreamPlayer audioPlayer;
 
     public override void _Ready()
     {
@@ -44,6 +47,9 @@ public partial class RocketWeapon : BaseWeapon
         targetsNode = GetNode("Targets");
         targets = new List<Node2D>();
         targetDetector = GetNode<Area2D>("Crosshair/Area2D");
+        
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer.Stream = shootSound;
     }
 
     public override void _Input(InputEvent @event)
@@ -65,6 +71,7 @@ public partial class RocketWeapon : BaseWeapon
             foreach (Node2D target in targets)
             {
                 rockets[fireIndex].Play();
+                audioPlayer.Play();
                 RocketProjectile rocket = rocketProjectileScene.Instantiate<RocketProjectile>();
                 Vector2 position = rockets[fireIndex].Position + new Vector2(0, -10);
                 rocket.SetStartPosition(ToGlobal(position));

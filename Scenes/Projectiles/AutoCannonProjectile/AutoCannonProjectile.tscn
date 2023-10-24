@@ -47,6 +47,7 @@ size = Vector2(10, 16)
 
 [node name="AutoCannonProjectile" type="Node2D"]
 script = ExtResource("1_dh784")
+explosionSoundPath = "res://Assets/Sounds/autocannon-impact.wav"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mpkey")

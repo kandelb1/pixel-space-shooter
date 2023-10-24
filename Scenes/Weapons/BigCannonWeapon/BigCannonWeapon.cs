@@ -5,6 +5,7 @@ public partial class BigCannonWeapon : BaseWeapon
 {
     [Export] private PackedScene bigCannonProjectileScene;
     [Export] private RigidBody2D ship;
+    [Export] private AudioStream shootSound;
     
     private AnimatedSprite2D animSprite;
     private Vector2 firePoint;
@@ -13,6 +14,8 @@ public partial class BigCannonWeapon : BaseWeapon
 
     private Sprite2D crosshair;
     private Label ammoLabel;
+    
+    private AudioStreamPlayer audioPlayer;
 
     public override void _Ready()
     {
@@ -22,6 +25,8 @@ public partial class BigCannonWeapon : BaseWeapon
         firePoint = GetNode<Node2D>("FirePoint").Position;
         crosshair = GetNode<Sprite2D>("Crosshair");
         ammoLabel = GetNode<Label>("Crosshair/AmmoLabel");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer.Stream = shootSound;
     }
 
     public override void _Input(InputEvent @event)
@@ -52,6 +57,7 @@ public partial class BigCannonWeapon : BaseWeapon
             // add recoil
             ship.ApplyImpulse(new Vector2(0, 1).Rotated(ship.Rotation) * 250f);
             currentAmmo--;
+            audioPlayer.Play();
         }
     }
 

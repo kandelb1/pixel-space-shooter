@@ -4,6 +4,7 @@ using System;
 public partial class ReflectorShieldPickup : LootPickup
 {
     [Export] private PackedScene reflectorShieldScene;
+    [Export] private string soundEffectPath;
     
     private const float SHIELD_TIME = 15f;
     
@@ -23,6 +24,8 @@ public partial class ReflectorShieldPickup : LootPickup
         {
             existingShield.IncreaseTimeLeft(SHIELD_TIME);    
         }
+        // having issues with an [Export] AudioStream, so I'm passing paths around
+        AudioManager.Instance.PlaySound(soundEffectPath);
     }
 
     private void AddShield(Ship playerShip, ReflectorShield shield)

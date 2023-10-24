@@ -3,6 +3,7 @@ using System;
 
 public partial class DreadnoughtShip : RigidBody2D
 {
+    [Export] private string deathSoundPath;
 
     private const float ROTATION_SPEED = 0.13f;
     private const int MAX_DEATHRAY_DISTANCE = 370;
@@ -117,6 +118,7 @@ public partial class DreadnoughtShip : RigidBody2D
         uiNode.Hide();
         GetNode<CollisionShape2D>("HurtboxComponent/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         ship.Play("explode");
+        AudioManager.Instance.PlaySound(deathSoundPath);
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
         QueueFree();

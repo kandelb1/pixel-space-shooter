@@ -5,7 +5,7 @@ public partial class AutoCannonWeapon : BaseWeapon
 {
     [Export] private PackedScene autoCannonProjectile; // TODO: be consistent with PackedScene naming: add 'scene' to the end
     [Export] private RigidBody2D ship;
-    // [Export] private Texture2D crosshair;
+    [Export] private AudioStream shootSound;
 
     private const float MAX_ANIMATION_SPEED = 7f; // seems like good stopping point
     
@@ -15,6 +15,8 @@ public partial class AutoCannonWeapon : BaseWeapon
 
     private Sprite2D crosshair;
 
+    private AudioStreamPlayer audioPlayer;
+
     public override void _Ready()
     {
         animSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -22,6 +24,8 @@ public partial class AutoCannonWeapon : BaseWeapon
         firePointLeft = GetNode<Node2D>("FirePointLeft").Position;
         firePointRight = GetNode<Node2D>("FirePointRight").Position;
         crosshair = GetNode<Sprite2D>("Crosshair");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer.Stream = shootSound;
     }
 
     public override void _Process(double delta)
@@ -39,6 +43,7 @@ public partial class AutoCannonWeapon : BaseWeapon
             bullet.SetStartPosition(ToGlobal(animSprite.Frame == 1 ? firePointLeft : firePointRight));
             bullet.SetStartRotation(ship.Rotation);
             GetNode("/root").AddChild(bullet);
+            audioPlayer.Play();
         }
     }
 

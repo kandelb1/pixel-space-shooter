@@ -3,7 +3,11 @@ using System;
 
 public partial class RocketProjectile : Node2D
 {
+    [Export] private string explosionSoundPath;
+    
     private const float ACCELERATION = 500f;
+
+    private ProjectileHitboxComponent hitboxComponent;
     
     private VelocityComponent velocityComponent;
     private Vector2 startPosition;
@@ -24,9 +28,16 @@ public partial class RocketProjectile : Node2D
     {
         Rotation = startRotation;
         Position = startPosition;
+        hitboxComponent = GetNode<ProjectileHitboxComponent>("ProjectileHitboxComponent");
+        hitboxComponent.AreaEntered += HandleAreaEntered;
         velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
         velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * initialVelocity.Length());
         velocityComponent.SetAcceleration(new Vector2(0, -1).Rotated(Rotation) * ACCELERATION);
+    }
+
+    private void HandleAreaEntered(Area2D other)
+    {
+        AudioManager.Instance.PlaySound(explosionSoundPath);
     }
 
     public override void _Process(double delta)

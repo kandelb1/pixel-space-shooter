@@ -144,6 +144,7 @@ _data = {
 [node name="InvincibilityShieldPickup" type="Node2D"]
 script = ExtResource("1_bmvmk")
 invincibilityShieldScene = ExtResource("2_glpkv")
+soundEffectPath = "res://Assets/Sounds/Powerup_5.wav"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sd83c")

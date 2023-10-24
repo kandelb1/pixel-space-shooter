@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cn0s4yv4osibw"]
+[gd_scene load_steps=16 format=3 uid="uid://cn0s4yv4osibw"]
 
 [ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_lcv1h"]
 [ext_resource type="Script" path="res://Scenes/Weapons/RocketWeapon/RocketWeapon.cs" id="2_u2nx2"]
 [ext_resource type="Texture2D" uid="uid://dpb7a0cu8ynvd" path="res://Assets/Player/rocket firing.png" id="3_6oo4n"]
 [ext_resource type="Texture2D" uid="uid://dsq7empulmfu3" path="res://Assets/UI/rockets-crosshair.png" id="3_dxeap"]
 [ext_resource type="PackedScene" uid="uid://vd7ao2do38rq" path="res://Scenes/UI/TargetLock/TargetLock.tscn" id="3_ygyk2"]
+[ext_resource type="AudioStream" uid="uid://81twybbrcahx" path="res://Assets/Sounds/rocket-fire.wav" id="4_slq6g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_37ld7"]
 atlas = ExtResource("3_6oo4n")
@@ -71,6 +72,7 @@ show_behind_parent = true
 script = ExtResource("2_u2nx2")
 rocketProjectileScene = ExtResource("2_lcv1h")
 targetLockScene = ExtResource("3_ygyk2")
+shootSound = ExtResource("4_slq6g")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -128,3 +130,5 @@ monitoring = false
 shape = SubResource("RectangleShape2D_27a31")
 
 [node name="Targets" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

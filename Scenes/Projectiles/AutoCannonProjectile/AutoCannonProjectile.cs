@@ -3,7 +3,11 @@ using System;
 
 public partial class AutoCannonProjectile : Node2D
 {
+    [Export] private string explosionSoundPath;
+    
     private const float VELOCITY = 400f;
+    
+    private ProjectileHitboxComponent hitboxComponent;
     
     private VelocityComponent velocityComponent;
     private float startRotation;
@@ -17,8 +21,15 @@ public partial class AutoCannonProjectile : Node2D
     {
         Rotation = startRotation;
         Position = startPosition;
+        hitboxComponent = GetNode<ProjectileHitboxComponent>("ProjectileHitboxComponent");
+        hitboxComponent.AreaEntered += HandleAreaEntered;
         velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
         velocityComponent.SetVelocity(new Vector2(0, -1).Rotated(Rotation) * VELOCITY);
+    }
+    
+    private void HandleAreaEntered(Area2D other)
+    {
+        AudioManager.Instance.PlaySound(explosionSoundPath);
     }
 
     public override void _Process(double delta)

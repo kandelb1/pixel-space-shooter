@@ -3,6 +3,7 @@ using Godot;
 public partial class ScoutShip : RigidBody2D
 {
     [Export] private PackedScene bullet;
+    [Export] private string deathSoundPath;
 
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -75,6 +76,7 @@ public partial class ScoutShip : RigidBody2D
         // disable the hurtbox so bullets can pass through it while the death animation is playing
         GetNode<CollisionShape2D>("HurtboxComponent/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         ship.Play("explode");
+        AudioManager.Instance.PlaySound(deathSoundPath);
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
         QueueFree();

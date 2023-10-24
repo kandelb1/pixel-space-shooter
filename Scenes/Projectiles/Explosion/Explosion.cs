@@ -5,6 +5,7 @@ using Godot.Collections;
 public partial class Explosion : AnimatedSprite2D
 {
     [Export] private int explosionDamage = 4;
+    [Export] private string explosionSoundPath;
     
     private Area2D explosionArea;
     private bool appliedDamage;
@@ -13,6 +14,7 @@ public partial class Explosion : AnimatedSprite2D
     {
         AnimationFinished += HandleAnimationFinished;
         explosionArea = GetNode<Area2D>("ExplosionArea");
+        AudioManager.Instance.PlaySound(explosionSoundPath);
     }
 
     public override void _PhysicsProcess(double delta)

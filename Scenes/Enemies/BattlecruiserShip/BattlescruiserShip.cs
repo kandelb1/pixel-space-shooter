@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// TODO: spell Battlecruiser correctly lol
 public partial class BattlescruiserShip : RigidBody2D
 {
     [Export] private PackedScene shipToDeployScene;
+    [Export] private string deathSoundPath;
     
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -117,6 +119,7 @@ public partial class BattlescruiserShip : RigidBody2D
         uiNode.Hide();
         GetNode<CollisionShape2D>("HurtboxComponent/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         ship.Play("explode");
+        AudioManager.Instance.PlaySound(deathSoundPath);
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.EnemyDestroyed, this);
         QueueFree();
