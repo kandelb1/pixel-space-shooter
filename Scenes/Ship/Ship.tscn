@@ -228,6 +228,7 @@ fullHealthImage = ExtResource("3_tjkyu")
 slightlyDamagedImage = ExtResource("4_6n0sq")
 moderatelyDamagedImage = ExtResource("5_coupd")
 severelyDamagedImage = ExtResource("6_6ypgs")
+hurtSoundPath = "res://Assets/Sounds/hurt.wav"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 public partial class Ship : RigidBody2D
@@ -18,6 +17,8 @@ public partial class Ship : RigidBody2D
     [Export] private Texture2D slightlyDamagedImage;
     [Export] private Texture2D moderatelyDamagedImage;
     [Export] private Texture2D severelyDamagedImage;
+
+    [Export] private string hurtSoundPath;
     
     private Vector2 firePoint;
     private AnimatedSprite2D engineEffects;
@@ -36,12 +37,14 @@ public partial class Ship : RigidBody2D
 
     private AnimatedSprite2D shield;
     private ShieldComponent shieldComponent;
-    
+
     // lets be inconsistent and use properties (because I want to)
     public float ShieldTimeRemaining { get; private set; } = MAX_SHIELD_TIME;
     public bool ShieldRecharging { get; private set; }
     private bool shieldActive;
 
+    private AudioStreamPlayer audioPlayer;
+    
     public override void _Ready()
     {
         firePoint = GetNode<Node2D>("FirePoint").Position;
@@ -70,6 +73,8 @@ public partial class Ship : RigidBody2D
         shield.Visible = shieldActive;
         shieldComponent = GetNode<ShieldComponent>("BaseShip/Shield/ShieldComponent");
         shieldComponent.ToggleShield(shieldActive);
+
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -209,6 +214,7 @@ public partial class Ship : RigidBody2D
     {
         ActivateDamageInvulnerability();
         UpdateShipSprite(newHealth, healthComponent.GetMaxHealth());
+        AudioManager.Instance.PlaySound(hurtSoundPath);
     }
 
     private void HandleHealthZero()
