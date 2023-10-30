@@ -6,10 +6,10 @@ public partial class GameEventBus : Node
     public static GameEventBus Instance { get; private set; }
 
     [Signal]
-    public delegate void HomePlanetDestroyedEventHandler();
+    public delegate void EnemyDestroyedEventHandler(Node2D enemy);
 
     [Signal]
-    public delegate void EnemyDestroyedEventHandler(Node2D enemy);
+    public delegate void PlayerDestroyedEventHandler();
     
     // we want this Action to be invokable outside of this class, so don't use the 'event' keyword 
     public Action<IPowerup> PowerupAcquired;
@@ -23,5 +23,10 @@ public partial class GameEventBus : Node
             return;
         }
         Instance = this;
+    }
+    
+    public override void _ExitTree()
+    {
+        Instance = null;
     }
 }

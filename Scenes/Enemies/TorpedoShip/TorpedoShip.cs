@@ -107,7 +107,7 @@ public partial class TorpedoShip : RigidBody2D
             TorpedoProjectile torpedo = torpedoScene.Instantiate<TorpedoProjectile>();
             torpedo.SetStartPosition(ToGlobal(firePoints[firePointIndex]));
             torpedo.SetStartRotation(Rotation);
-            GetNode("/root").AddChild(torpedo);
+            GetNode("/root/Main/Projectiles").AddChild(torpedo);
             firePointIndex++;
             AudioManager.Instance.PlaySound(shootSoundPath);
         }

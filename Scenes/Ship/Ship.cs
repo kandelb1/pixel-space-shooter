@@ -18,9 +18,7 @@ public partial class Ship : RigidBody2D
     [Export] private Texture2D slightlyDamagedImage;
     [Export] private Texture2D moderatelyDamagedImage;
     [Export] private Texture2D severelyDamagedImage;
-
-    [Export] private HomePlanet homePlanet;
-
+    
     private Vector2 firePoint;
     private AnimatedSprite2D engineEffects;
 
@@ -98,14 +96,6 @@ public partial class Ship : RigidBody2D
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
-        if (dead) // unfortunately we can't set the position of a rigidbody2d anytime we want. we have to do it inside of _IntegrateForces()
-        {
-            healthComponent.Heal(healthComponent.GetMaxHealth());
-            state.Transform = new Transform2D(0, homePlanet.GetSpawnPosition());
-            dead = false;
-            Show();
-            return;
-        }
         LookFollow(state, GetGlobalMousePosition());
         bool moving = false;
         
@@ -225,6 +215,7 @@ public partial class Ship : RigidBody2D
     {
         dead = true;
         Hide();
+        GameEventBus.Instance.EmitSignal(GameEventBus.SignalName.PlayerDestroyed);
     }
 
     public BaseWeapon GetEquippedWeapon() => equippedWeapon;
@@ -234,6 +225,15 @@ public partial class Ship : RigidBody2D
         foreach (BaseWeapon weapon in weapons)
         {
             if (weapon is T weaponType) return weaponType;
+        }
+        return null;
+    }
+
+    public T GetComponent<T>() where T : Node
+    {
+        foreach (Node child in GetChildren())
+        {
+            if (child is T component) return component;
         }
         return null;
     }

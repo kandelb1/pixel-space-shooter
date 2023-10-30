@@ -41,6 +41,6 @@ public partial class BigCannonProjectile : Node2D
     {
         Node2D explosion = explosionScene.Instantiate<Node2D>();
         explosion.Position = Position;
-        GetNode("/root").AddChild(explosion);
+        GetNode("/root/Main/Projectiles").AddChild(explosion);
     }
 }

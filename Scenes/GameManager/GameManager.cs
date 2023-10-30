@@ -20,6 +20,9 @@ public partial class GameManager : Node
 
     [Export] private Array<PackedScene> pickupScenes;
 
+    [Export] private Node uiNode;
+    [Export] private PackedScene scoreScreenScene;
+
     private const float MIN_SPAWN_DISTANCE = 100f;
     
     public int Score { get; private set; }
@@ -41,6 +44,7 @@ public partial class GameManager : Node
         Instance = this;
 
         GameEventBus.Instance.EnemyDestroyed += HandleEnemyDestroyed;
+        GameEventBus.Instance.PlayerDestroyed += HandlePlayerDestroyed;
         
         scoutWaveTimer = GetNode<Timer>("ScoutWaveTimer");
         scoutWaveTimer.Timeout += SpawnScoutWave;
@@ -49,9 +53,20 @@ public partial class GameManager : Node
         scaryWaveTimer = GetNode<Timer>("ScaryWaveTimer");
         scaryWaveTimer.Timeout += SpawnScaryWave;
         rng = new RandomNumberGenerator();
-        CallDeferred(MethodName.SpawnInitialEnemies); // needs to be deferred because WorldBoundary hasn't set its boundaries yet
+    }
 
+    public override void _ExitTree()
+    {
+        GameEventBus.Instance.EnemyDestroyed -= HandleEnemyDestroyed;
+        GameEventBus.Instance.PlayerDestroyed -= HandlePlayerDestroyed; 
+        Instance = null;
+    }
+
+    public void StartGame()
+    {
+        SpawnInitialEnemies();
         Input.MouseMode = Input.MouseModeEnum.Hidden;
+        GetTree().Paused = false;
     }
 
     private void HandleEnemyDestroyed(Node2D enemy)
@@ -64,6 +79,19 @@ public partial class GameManager : Node
         RollLoot(enemy.Position);
     }
 
+    private void HandlePlayerDestroyed()
+    {
+        // pause the game and show the score screen
+        ScoreScreen scoreScreen = scoreScreenScene.Instantiate<ScoreScreen>();
+        scoreScreen.GameScore = Score;
+        uiNode.AddChild(scoreScreen);
+        // reset singletons because im doing this in a terrible way
+        Instance = null;
+        // AudioManager.Instance = null;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        GetTree().Paused = true;
+    }
+
     private void RollLoot(Vector2 position)
     {
         // basic loot system that has a 30% chance of spawning a random pickup
@@ -72,7 +100,7 @@ public partial class GameManager : Node
         
         Node2D pickup = pickupScenes.PickRandom().Instantiate<Node2D>();
         pickup.Position = position;
-        GetNode("/root").AddChild(pickup);
+        GetNode("/root/Main/Pickups").AddChild(pickup);
     }
 
     private void SpawnInitialEnemies()

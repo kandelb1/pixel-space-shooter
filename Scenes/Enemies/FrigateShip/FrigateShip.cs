@@ -73,7 +73,7 @@ public partial class FrigateShip : RigidBody2D
                 BigBullet bullet = bigBulletScene.Instantiate<BigBullet>();
                 bullet.SetStartPosition(ToGlobal(firePoints[i]));
                 bullet.SetStartRotation(Rotation);
-                GetNode("/root").AddChild(bullet);
+                GetNode("/root/Main/Projectiles").AddChild(bullet);
                 AudioManager.Instance.PlaySound(shootSoundPath);
             }
         }

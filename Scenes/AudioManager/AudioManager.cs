@@ -18,6 +18,11 @@ public partial class AudioManager : Node
         Instance = this;
     }
 
+    public override void _ExitTree()
+    {
+        Instance = null;
+    }
+
     public void PlaySound(string pathToResource)
     {
         AudioStream stream = ResourceLoader.Load<AudioStream>(pathToResource);

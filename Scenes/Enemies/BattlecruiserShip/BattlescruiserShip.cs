@@ -89,7 +89,7 @@ public partial class BattlescruiserShip : RigidBody2D
             deployShip.Rotation = Rotation;
             Vector2 deployDir = new Vector2(Mathf.Sign(deployPoint.X), 0);
             deployShip.ApplyImpulse(deployDir.Rotated(Rotation) * 100f);
-            GetNode("/root").AddChild(deployShip);
+            GetNode("/root/Main/Enemies").AddChild(deployShip);
         }
     }
 

@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # IDE-specific ignores
 .idea/
+
+# my godot export directory
+build/

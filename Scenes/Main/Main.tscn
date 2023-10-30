@@ -1,15 +1,14 @@
-[gd_scene load_steps=40 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=39 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
+[ext_resource type="Script" path="res://Scenes/Main/Main.cs" id="1_epbqp"]
 [ext_resource type="PackedScene" uid="uid://bntc15nh14mct" path="res://Scenes/GameManager/GameManager.tscn" id="1_x6ggp"]
 [ext_resource type="PackedScene" uid="uid://0kvro11h376l" path="res://Scenes/AudioManager/AudioManager.tscn" id="2_23tpo"]
+[ext_resource type="PackedScene" uid="uid://2lhed71iik84" path="res://Scenes/UI/ScoreScreen/ScoreScreen.tscn" id="2_ouvmj"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
-[ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="4_ldedj"]
-[ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="5_6ygdc"]
 [ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
 [ext_resource type="PackedScene" uid="uid://bcu5elxn4xkd4" path="res://Scenes/UI/PlayerShieldBar/PlayerShieldBar.tscn" id="6_bydsq"]
-[ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
 [ext_resource type="PackedScene" uid="uid://ca5yhsn4sljvx" path="res://Scenes/UI/Minimap/Minimap.tscn" id="7_b27r7"]
 [ext_resource type="Texture2D" uid="uid://d180flf02na4q" path="res://Assets/Background/Starry background  - Layer 01 - Void.png" id="7_rxews"]
 [ext_resource type="Texture2D" uid="uid://brkfqd3cym13d" path="res://Assets/Background/Starry background  - Layer 02 - Stars.png" id="8_qkr82"]
@@ -163,30 +162,25 @@ animations = [{
 }]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_epbqp")
 
-[node name="GameManager" parent="." node_paths=PackedStringArray("worldBoundary", "enemiesNode", "playerShip") instance=ExtResource("1_x6ggp")]
-process_mode = 4
+[node name="GameManager" parent="." node_paths=PackedStringArray("worldBoundary", "enemiesNode", "playerShip", "uiNode") instance=ExtResource("1_x6ggp")]
 worldBoundary = NodePath("../WorldBoundary")
 enemiesNode = NodePath("../Enemies")
 playerShip = NodePath("../Ship")
+uiNode = NodePath("../ScreenUI")
+scoreScreenScene = ExtResource("2_ouvmj")
 
 [node name="AudioManager" parent="." instance=ExtResource("2_23tpo")]
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="DreadnoughtShip" parent="Enemies" instance=ExtResource("5_6ygdc")]
-position = Vector2(-255, 199)
+[node name="Projectiles" type="Node" parent="."]
 
-[node name="TorpedoShip" parent="Enemies" instance=ExtResource("4_ldedj")]
-position = Vector2(224, -90)
+[node name="Pickups" type="Node" parent="."]
 
-[node name="HomePlanet" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("6_eotbu")]
-position = Vector2(388, 301)
-playerShip = NodePath("../Ship")
-
-[node name="Ship" parent="." node_paths=PackedStringArray("homePlanet") instance=ExtResource("1_01vvk")]
+[node name="Ship" parent="." instance=ExtResource("1_01vvk")]
 position = Vector2(325, 293)
-homePlanet = NodePath("../HomePlanet")
 
 [node name="MainCamera" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("3_16ljc")]
 playerShip = NodePath("../Ship")

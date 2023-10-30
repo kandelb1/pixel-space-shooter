@@ -53,7 +53,7 @@ public partial class BigCannonWeapon : BaseWeapon
             BigCannonProjectile bullet = bigCannonProjectileScene.Instantiate<BigCannonProjectile>();
             bullet.SetStartPosition(ToGlobal(firePoint));
             bullet.SetStartRotation(ship.Rotation);
-            GetNode("/root").AddChild(bullet); // TODO: find a better way to add bullets to the scene tree
+            GetNode("/root/Main/Projectiles").AddChild(bullet); // TODO: find a better way to add bullets to the scene tree
             // add recoil
             ship.ApplyImpulse(new Vector2(0, 1).Rotated(ship.Rotation) * 250f);
             currentAmmo--;

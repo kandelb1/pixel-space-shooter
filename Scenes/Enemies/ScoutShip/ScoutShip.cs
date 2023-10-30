@@ -90,7 +90,7 @@ public partial class ScoutShip : RigidBody2D
             BasicBullet basicBullet = bullet.Instantiate<BasicBullet>();
             basicBullet.SetStartPosition(ToGlobal(firePoint));
             basicBullet.SetStartRotation(Rotation);
-            GetNode("/root").AddChild(basicBullet); // TODO: maybe use some singleton to hold the projectiles
+            GetNode("/root/Main/Projectiles").AddChild(basicBullet); // TODO: maybe use some singleton to hold the projectiles
             AudioManager.Instance.PlaySound(shootSoundPath);
         }
     }

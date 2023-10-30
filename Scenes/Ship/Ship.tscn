@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://hqqlksqhi03j"]
+[gd_scene load_steps=44 format=3 uid="uid://hqqlksqhi03j"]
 
 [ext_resource type="Script" path="res://Scenes/Ship/Ship.cs" id="2_lmpg3"]
 [ext_resource type="PackedScene" uid="uid://i8wtwrcnvewu" path="res://Scenes/Projectiles/RocketProjectile/RocketProjectile.tscn" id="2_x7te5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bakirdcpr77pm" path="res://Assets/Player/Main Ship - Engines - Base Engine.png" id="6_r6rkh"]
 [ext_resource type="PackedScene" uid="uid://lednh40gfq1l" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="7_12o86"]
 [ext_resource type="Texture2D" uid="uid://ci331cjf7h8oh" path="res://Assets/Player/Main Ship - Engines - Base Engine - Spritesheet.png" id="7_apa0s"]
+[ext_resource type="PackedScene" uid="uid://dsl4tu54g63ep" path="res://Scenes/Weapons/ZapperWeapon/ZapperWeapon.tscn" id="7_gc17r"]
 [ext_resource type="PackedScene" uid="uid://b4ayqhlp1lgdn" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="8_v583v"]
 [ext_resource type="Texture2D" uid="uid://kv75txua5wh5" path="res://Assets/Player/Main Ship - Shields - Round Shield.png" id="12_vby0i"]
 [ext_resource type="PackedScene" uid="uid://cr48uy7s0vfdc" path="res://Scenes/Components/ShieldComponent/ShieldComponent.tscn" id="13_hu1bu"]
@@ -242,6 +243,9 @@ texture = ExtResource("3_tjkyu")
 
 [node name="Weapons" type="Node2D" parent="BaseShip"]
 show_behind_parent = true
+
+[node name="ZapperWeapon" parent="BaseShip/Weapons" instance=ExtResource("7_gc17r")]
+visible = false
 
 [node name="RocketsWeapon" parent="BaseShip/Weapons" node_paths=PackedStringArray("ship") instance=ExtResource("4_852pw")]
 visible = false

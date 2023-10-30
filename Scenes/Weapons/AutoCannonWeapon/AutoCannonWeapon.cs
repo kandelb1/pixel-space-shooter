@@ -42,7 +42,7 @@ public partial class AutoCannonWeapon : BaseWeapon
             AutoCannonProjectile bullet = autoCannonProjectile.Instantiate<AutoCannonProjectile>();
             bullet.SetStartPosition(ToGlobal(animSprite.Frame == 1 ? firePointLeft : firePointRight));
             bullet.SetStartRotation(ship.Rotation);
-            GetNode("/root").AddChild(bullet);
+            GetNode("/root/Main/Projectiles").AddChild(bullet);
             audioPlayer.Play();
         }
     }

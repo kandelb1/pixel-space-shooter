@@ -77,7 +77,7 @@ public partial class RocketWeapon : BaseWeapon
                 rocket.SetStartPosition(ToGlobal(position));
                 rocket.SetStartRotation(ship.Rotation);
                 rocket.SetTarget(target);
-                GetNode("/root").AddChild(rocket);
+                GetNode("/root/Main/Projectiles").AddChild(rocket);
                 currentAmmo--;
                 fireIndex++;
                 timer.Start(); // restart the reload timer
