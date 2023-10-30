@@ -42,8 +42,6 @@ public partial class Ship : RigidBody2D
     public float ShieldTimeRemaining { get; private set; } = MAX_SHIELD_TIME;
     public bool ShieldRecharging { get; private set; }
     private bool shieldActive;
-
-    private AudioStreamPlayer audioPlayer;
     
     public override void _Ready()
     {
@@ -73,8 +71,6 @@ public partial class Ship : RigidBody2D
         shield.Visible = shieldActive;
         shieldComponent = GetNode<ShieldComponent>("BaseShip/Shield/ShieldComponent");
         shieldComponent.ToggleShield(shieldActive);
-
-        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)

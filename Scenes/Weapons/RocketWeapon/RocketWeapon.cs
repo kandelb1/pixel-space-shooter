@@ -7,7 +7,7 @@ using Godot.Collections;
 public partial class RocketWeapon : BaseWeapon
 {
     [Export] private PackedScene rocketProjectileScene;
-    [Export] private RigidBody2D ship;
+    [Export] private Ship ship;
     [Export] private PackedScene targetLockScene;
     [Export] private AudioStream shootSound;
     
@@ -50,6 +50,8 @@ public partial class RocketWeapon : BaseWeapon
         
         audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         audioPlayer.Stream = shootSound;
+
+        ship.WeaponEquipped += HandleWeaponChanged;
     }
 
     public override void _Input(InputEvent @event)
@@ -153,6 +155,11 @@ public partial class RocketWeapon : BaseWeapon
         targetLock.Position = target.Position;
         targetsNode.AddChild(targetLock);
         targets.Add(target);
+
+        target.TreeExiting += () =>
+        {
+            targets.Remove(target);
+        };
     }
 
     private void ClearTargets()
@@ -173,5 +180,10 @@ public partial class RocketWeapon : BaseWeapon
         }
         fireIndex = 0;
         currentAmmo = 6;
+    }
+
+    private void HandleWeaponChanged(BaseWeapon _)
+    {
+        SetTargeting(false);
     }
 }
