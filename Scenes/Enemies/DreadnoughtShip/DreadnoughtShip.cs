@@ -4,6 +4,8 @@ using System;
 public partial class DreadnoughtShip : RigidBody2D
 {
     [Export] private string deathSoundPath;
+    [Export] private AudioStream laserChargeUp;
+    [Export] private AudioStream laserFire;
 
     private const float ROTATION_SPEED = 0.13f;
     private const int MAX_DEATHRAY_DISTANCE = 370;
@@ -29,6 +31,8 @@ public partial class DreadnoughtShip : RigidBody2D
 
     private bool dead;
 
+    private AudioStreamPlayer audioPlayer;
+
     public override void _Ready()
     {
         ship = GetNode<AnimatedSprite2D>("BaseShip");
@@ -52,6 +56,8 @@ public partial class DreadnoughtShip : RigidBody2D
         deathRayCooldownTimer = GetNode<Timer>("DeathRay/CooldownTimer");
         deathRayCooldownTimer.Timeout += HandleCooldownOver;
         ToggleDeathRay(false);
+
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
     }
     
     private void LookFollow(PhysicsDirectBodyState2D state, Vector2 targetPosition)
@@ -129,11 +135,14 @@ public partial class DreadnoughtShip : RigidBody2D
         if (ship.Animation == "shoot" && ship.Frame == 12)
         {
             ToggleDeathRay(true);
+            audioPlayer.Stream = laserFire;
+            audioPlayer.Play();
         }
 
         if (ship.Animation == "shoot" && ship.Frame == 56)
         {
             ToggleDeathRay(false);
+            audioPlayer.Stop();
         }
     }
 
@@ -160,6 +169,8 @@ public partial class DreadnoughtShip : RigidBody2D
         if (deathRayFiring || deathRayCooldownTimer.TimeLeft > 0) return;
         ship.Play("shoot");
         deathRayFiring = true;
+        audioPlayer.Stream = laserChargeUp;
+        audioPlayer.Play();
         await ToSignal(ship, AnimatedSprite2D.SignalName.AnimationFinished);
         ship.Play("idle");
         deathRayFiring = false;

@@ -9,6 +9,7 @@ public partial class TorpedoShip : RigidBody2D
     
     [Export] private PackedScene torpedoScene;
     [Export] private string deathSoundPath;
+    [Export] private string shootSoundPath;
 
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -108,6 +109,7 @@ public partial class TorpedoShip : RigidBody2D
             torpedo.SetStartRotation(Rotation);
             GetNode("/root").AddChild(torpedo);
             firePointIndex++;
+            AudioManager.Instance.PlaySound(shootSoundPath);
         }
     }
 

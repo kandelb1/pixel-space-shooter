@@ -239,6 +239,7 @@ linear_damp = 0.75
 script = ExtResource("1_5uw0u")
 bigBulletScene = ExtResource("2_5cnyj")
 deathSoundPath = "res://Assets/Sounds/death1.wav"
+shootSoundPath = "res://Assets/Sounds/zap2-lowered.wav"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

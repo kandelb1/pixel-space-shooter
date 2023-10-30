@@ -1,9 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=40 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="PackedScene" uid="uid://bntc15nh14mct" path="res://Scenes/GameManager/GameManager.tscn" id="1_x6ggp"]
+[ext_resource type="PackedScene" uid="uid://0kvro11h376l" path="res://Scenes/AudioManager/AudioManager.tscn" id="2_23tpo"]
 [ext_resource type="PackedScene" uid="uid://de804x3dac4v6" path="res://Scenes/UI/PlayerHealthBar/PlayerHealthBar.tscn" id="3_7bthx"]
 [ext_resource type="PackedScene" uid="uid://baxnexwmh3vfa" path="res://Scenes/MainCamera/MainCamera.tscn" id="3_16ljc"]
+[ext_resource type="PackedScene" uid="uid://bdwjvdc6xcnh0" path="res://Scenes/Enemies/TorpedoShip/TorpedoShip.tscn" id="4_ldedj"]
+[ext_resource type="PackedScene" uid="uid://b1ajklrt8fu6s" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.tscn" id="5_6ygdc"]
 [ext_resource type="PackedScene" uid="uid://xw13og6lv2aa" path="res://Scenes/UI/WeaponSelectUI/WeaponSelectUI.tscn" id="5_nj484"]
 [ext_resource type="PackedScene" uid="uid://bcu5elxn4xkd4" path="res://Scenes/UI/PlayerShieldBar/PlayerShieldBar.tscn" id="6_bydsq"]
 [ext_resource type="PackedScene" uid="uid://b61xta1a73ynt" path="res://Scenes/Spawners/HomePlanet/HomePlanet.tscn" id="6_eotbu"]
@@ -13,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://c46q0op4n00cm" path="res://Assets/Background/Starry background  - Layer 03 - Stars.png" id="9_paqhv"]
 [ext_resource type="PackedScene" uid="uid://cvfead8bmsixr" path="res://Scenes/UI/PlayerScore/PlayerScore.tscn" id="9_yrq5n"]
 [ext_resource type="PackedScene" uid="uid://bayfh17skg8ad" path="res://Scenes/WorldBoundary/WorldBoundary.tscn" id="11_m5r3d"]
+[ext_resource type="PackedScene" uid="uid://djel2eco6xtac" path="res://Scenes/UI/PowerupList/PowerupList.tscn" id="12_xpwjk"]
+[ext_resource type="PackedScene" uid="uid://du6624wsbnpua" path="res://Scenes/Pickups/ReflectorShieldPickup/ReflectorShieldPickup.tscn" id="14_2p176"]
+[ext_resource type="PackedScene" uid="uid://dc6010q7mxi6n" path="res://Scenes/Pickups/InvincibilityShieldPickup/InvincibilityShieldPickup.tscn" id="20_c562b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -159,11 +165,20 @@ animations = [{
 [node name="Main" type="Node"]
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("worldBoundary", "enemiesNode", "playerShip") instance=ExtResource("1_x6ggp")]
+process_mode = 4
 worldBoundary = NodePath("../WorldBoundary")
 enemiesNode = NodePath("../Enemies")
 playerShip = NodePath("../Ship")
 
+[node name="AudioManager" parent="." instance=ExtResource("2_23tpo")]
+
 [node name="Enemies" type="Node" parent="."]
+
+[node name="DreadnoughtShip" parent="Enemies" instance=ExtResource("5_6ygdc")]
+position = Vector2(-255, 199)
+
+[node name="TorpedoShip" parent="Enemies" instance=ExtResource("4_ldedj")]
+position = Vector2(224, -90)
 
 [node name="HomePlanet" parent="." node_paths=PackedStringArray("playerShip") instance=ExtResource("6_eotbu")]
 position = Vector2(388, 301)
@@ -189,6 +204,9 @@ playerShip = NodePath("../../../Ship")
 [node name="PlayerShieldBar" parent="ScreenUI/VBoxContainer" node_paths=PackedStringArray("playerShip") instance=ExtResource("6_bydsq")]
 layout_mode = 2
 playerShip = NodePath("../../../Ship")
+
+[node name="PowerupList" parent="ScreenUI/VBoxContainer" instance=ExtResource("12_xpwjk")]
+layout_mode = 2
 
 [node name="WeaponSelectUI" parent="ScreenUI" node_paths=PackedStringArray("playerShip") instance=ExtResource("5_nj484")]
 playerShip = NodePath("../../Ship")
@@ -233,3 +251,27 @@ centered = false
 
 [node name="WorldBoundary" parent="." instance=ExtResource("11_m5r3d")]
 position = Vector2(-1027, -128)
+
+[node name="ReflectorShieldPickup" parent="." instance=ExtResource("14_2p176")]
+position = Vector2(100, 234)
+
+[node name="ReflectorShieldPickup2" parent="." instance=ExtResource("14_2p176")]
+position = Vector2(317, 149)
+
+[node name="ReflectorShieldPickup3" parent="." instance=ExtResource("14_2p176")]
+position = Vector2(67, 369)
+
+[node name="ReflectorShieldPickup4" parent="." instance=ExtResource("14_2p176")]
+position = Vector2(-10, 371)
+
+[node name="InvincibilityShieldPickup" parent="." instance=ExtResource("20_c562b")]
+position = Vector2(247, 367)
+
+[node name="InvincibilityShieldPickup2" parent="." instance=ExtResource("20_c562b")]
+position = Vector2(176, 373)
+
+[node name="InvincibilityShieldPickup3" parent="." instance=ExtResource("20_c562b")]
+position = Vector2(100, 372)
+
+[node name="InvincibilityShieldPickup4" parent="." instance=ExtResource("20_c562b")]
+position = Vector2(35, 372)

@@ -7,6 +7,7 @@ public partial class FrigateShip : RigidBody2D
 {
     [Export] private PackedScene bigBulletScene;
     [Export] private string deathSoundPath;
+    [Export] private string shootSoundPath;
     
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -73,6 +74,7 @@ public partial class FrigateShip : RigidBody2D
                 bullet.SetStartPosition(ToGlobal(firePoints[i]));
                 bullet.SetStartRotation(Rotation);
                 GetNode("/root").AddChild(bullet);
+                AudioManager.Instance.PlaySound(shootSoundPath);
             }
         }
     }

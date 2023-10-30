@@ -1,8 +1,10 @@
-[gd_scene load_steps=120 format=3 uid="uid://b1ajklrt8fu6s"]
+[gd_scene load_steps=122 format=3 uid="uid://b1ajklrt8fu6s"]
 
 [ext_resource type="Texture2D" uid="uid://bjtmqk3gikont" path="res://Assets/Dreadnought/Kla'ed - Dreadnought - Destruction.png" id="1_12vqg"]
 [ext_resource type="Script" path="res://Scenes/Enemies/DreadnoughtShip/DreadnoughtShip.cs" id="1_g0rjm"]
 [ext_resource type="Texture2D" uid="uid://dlss4raaxdpxi" path="res://Assets/Dreadnought/Kla'ed - Dreadnought - Base.png" id="1_up2aq"]
+[ext_resource type="AudioStream" uid="uid://ddhxdqtgxxp32" path="res://Assets/Sounds/laser-charge.wav" id="2_iryjf"]
+[ext_resource type="AudioStream" uid="uid://ja5xmbkh3sf8" path="res://Assets/Sounds/laser-fire.wav" id="3_el78i"]
 [ext_resource type="Texture2D" uid="uid://dayju3dx04007" path="res://Assets/Dreadnought/Kla'ed - Dreadnought - Weapons.png" id="3_hc5no"]
 [ext_resource type="Texture2D" uid="uid://celewfv3v81cx" path="res://Assets/Dreadnought/dreadnought-ray-1.png" id="3_wb5l5"]
 [ext_resource type="Texture2D" uid="uid://bfbpvu6rneorc" path="res://Assets/Dreadnought/Kla'ed - Dreadnought - Shield.png" id="4_3b7yh"]
@@ -748,6 +750,8 @@ collision_mask = 21
 center_of_mass_mode = 1
 script = ExtResource("1_g0rjm")
 deathSoundPath = "res://Assets/Sounds/death6.wav"
+laserChargeUp = ExtResource("2_iryjf")
+laserFire = ExtResource("3_el78i")
 
 [node name="DeathRay" type="Line2D" parent="."]
 texture_repeat = 2
@@ -825,5 +829,7 @@ shape = SubResource("CircleShape2D_a67lw")
 
 [node name="ScoreComponent" parent="." instance=ExtResource("16_tedwc")]
 ScoreValue = 8
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [editable path="SightRadiusComponent"]

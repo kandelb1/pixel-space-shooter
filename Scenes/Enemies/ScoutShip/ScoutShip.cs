@@ -4,6 +4,7 @@ public partial class ScoutShip : RigidBody2D
 {
     [Export] private PackedScene bullet;
     [Export] private string deathSoundPath;
+    [Export] private string shootSoundPath;
 
     private AnimatedSprite2D ship;
     private AnimatedSprite2D engine;
@@ -90,6 +91,7 @@ public partial class ScoutShip : RigidBody2D
             basicBullet.SetStartPosition(ToGlobal(firePoint));
             basicBullet.SetStartRotation(Rotation);
             GetNode("/root").AddChild(basicBullet); // TODO: maybe use some singleton to hold the projectiles
+            AudioManager.Instance.PlaySound(shootSoundPath);
         }
     }
 
