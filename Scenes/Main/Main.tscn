@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ck0l5aykc4jh0"]
+[gd_scene load_steps=37 format=3 uid="uid://ck0l5aykc4jh0"]
 
 [ext_resource type="PackedScene" uid="uid://hqqlksqhi03j" path="res://Scenes/Ship/Ship.tscn" id="1_01vvk"]
 [ext_resource type="Script" path="res://Scenes/Main/Main.cs" id="1_epbqp"]
@@ -16,8 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://cvfead8bmsixr" path="res://Scenes/UI/PlayerScore/PlayerScore.tscn" id="9_yrq5n"]
 [ext_resource type="PackedScene" uid="uid://bayfh17skg8ad" path="res://Scenes/WorldBoundary/WorldBoundary.tscn" id="11_m5r3d"]
 [ext_resource type="PackedScene" uid="uid://djel2eco6xtac" path="res://Scenes/UI/PowerupList/PowerupList.tscn" id="12_xpwjk"]
-[ext_resource type="PackedScene" uid="uid://du6624wsbnpua" path="res://Scenes/Pickups/ReflectorShieldPickup/ReflectorShieldPickup.tscn" id="14_2p176"]
-[ext_resource type="PackedScene" uid="uid://dc6010q7mxi6n" path="res://Scenes/Pickups/InvincibilityShieldPickup/InvincibilityShieldPickup.tscn" id="20_c562b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfgxq"]
 atlas = ExtResource("8_qkr82")
@@ -245,27 +243,3 @@ centered = false
 
 [node name="WorldBoundary" parent="." instance=ExtResource("11_m5r3d")]
 position = Vector2(-1027, -128)
-
-[node name="ReflectorShieldPickup" parent="." instance=ExtResource("14_2p176")]
-position = Vector2(100, 234)
-
-[node name="ReflectorShieldPickup2" parent="." instance=ExtResource("14_2p176")]
-position = Vector2(317, 149)
-
-[node name="ReflectorShieldPickup3" parent="." instance=ExtResource("14_2p176")]
-position = Vector2(67, 369)
-
-[node name="ReflectorShieldPickup4" parent="." instance=ExtResource("14_2p176")]
-position = Vector2(-10, 371)
-
-[node name="InvincibilityShieldPickup" parent="." instance=ExtResource("20_c562b")]
-position = Vector2(247, 367)
-
-[node name="InvincibilityShieldPickup2" parent="." instance=ExtResource("20_c562b")]
-position = Vector2(176, 373)
-
-[node name="InvincibilityShieldPickup3" parent="." instance=ExtResource("20_c562b")]
-position = Vector2(100, 372)
-
-[node name="InvincibilityShieldPickup4" parent="." instance=ExtResource("20_c562b")]
-position = Vector2(35, 372)
